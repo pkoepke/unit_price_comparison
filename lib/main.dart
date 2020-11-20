@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
+import 'dart:async'; // For Timer class.
+
+const animationDuration = 500;
 
 /// Construct a color from a hex code string, of the format #RRGGBB.
 Color hexToColor(String code) {
@@ -8,6 +11,7 @@ Color hexToColor(String code) {
 }
 
 final dukeBlue = hexToColor("#001A57");
+final cardBackground = hexToColor("#424242");
 
 // Create a MaterialColor swatch from a single color.
 // From https://medium.com/@filipvk/creating-a-custom-color-swatch-in-flutter-554bcdcb27f3
@@ -33,6 +37,21 @@ MaterialColor createMaterialColor(Color color) {
 
 final dukeBlueMaterialColorSwatch = createMaterialColor(dukeBlue);
 
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primarySwatch: dukeBlueMaterialColorSwatch,
+  scaffoldBackgroundColor: Colors.black,
+  backgroundColor: Colors.grey[900],
+);
+
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: dukeBlueMaterialColorSwatch,
+);
+
+ThemeData currentTheme = darkTheme;
+//ThemeData currentTheme = lightTheme;
+
 //void main() => runApp(MyApp());
 void main() {
   //debugPaintSizeEnabled = true;
@@ -45,10 +64,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Unit Price Comparison',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: dukeBlueMaterialColorSwatch, // Colors.blue,
-      ),
+      theme: currentTheme,
       home: MyHomePage(title: 'Unit Price Comparison'),
     );
   }
@@ -65,6 +81,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _cardCounter = 5; // Starting number of cards
+  bool _secondRowOpaque = false;
+  bool _showSecondRow = false;
 
   void addCard() {
     setState(() {
@@ -73,23 +91,61 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void removeCard() {
-    if (_cardCounter > 2) // Only remove if there are more than 2 cards
+    if (_cardCounter > 2) {
       setState(() {
         _cardCounter--;
       });
+    }
+  }
+
+  void showHideSecondRow() {
+    // Delay hiding the second row if it's shown to allow the fade out to finish.
+    if (_showSecondRow) {
+      setState(() {
+        _secondRowOpaque = !_secondRowOpaque;
+      });
+      var timer = Timer(
+          Duration(milliseconds: animationDuration),
+          () => setState(() {
+                _showSecondRow =
+                    _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
+              }));
+    } else {
+      setState(() {
+        _showSecondRow = !_showSecondRow;
+      });
+      setState(() {
+        _secondRowOpaque = !_secondRowOpaque;
+      });
+      /*var timer = Timer(
+          Duration(milliseconds: animationDuration),
+          () => setState(() {
+                _fadeSecondRowLabels = !_fadeSecondRowLabels;
+              }));*/
+    }
   }
 
   List<Widget> buildCardList(_cardCounter) {
     List<Widget> cardList = [];
     // Starts at 1 because there is no item zero.
     for (int i = 1; i <= _cardCounter; i++) {
-      cardList.add(makeItemCard(i));
+      cardList.add(makeItemCard(i, _showSecondRow, _secondRowOpaque));
     }
     return cardList;
   }
 
+  void setTheme() {
+    setState(() {
+      currentTheme =
+          MediaQuery.of(context).platformBrightness == Brightness.dark
+              ? darkTheme
+              : lightTheme;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    setTheme();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -105,16 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           IconButton(
             icon: Icon(Icons.unfold_more), //unfold_less will be the opposite
-            onPressed: () {},
+            onPressed: () {
+              showHideSecondRow();
+            },
           ),
-          /*IconButton(
-            icon: Icon(Icons.remove),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {},
-          ),*/
         ],
       ),
       body: ListView(children: buildCardList(_cardCounter)),
@@ -163,63 +213,101 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget makeItemCard(int cardNum) {
+Widget makeItemCard(int cardNum, bool showSecondRow, bool secondRowOpaque) {
   return Card(
-    child: Column(
-      children: [
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-          Expanded(
-            child: Text('Item $cardNum', textAlign: TextAlign.center),
+    color: currentTheme
+        .backgroundColor, // TODO This occasionally fails and returns a light blue (almost Carolina blue!), might have to fix this up.
+    //color: Colors.grey[900],
+    child: Container(
+      margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 7.0),
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Expanded(
+              child: Text('Item $cardNum', textAlign: TextAlign.center),
+            ),
+            Expanded(
+                flex: 2,
+                child: Container(
+                  margin: const EdgeInsets.only(left: 2.0, right: 2.0),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(hintText: 'Price \$'),
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
+                    ],
+                    textInputAction: TextInputAction.next,
+                  ),
+                )),
+            Expanded(
+                flex: 2,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(hintText: 'Units'),
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
+                    ],
+                    textInputAction: TextInputAction.next,
+                  ),
+                )),
+            Expanded(
+              flex: 2,
+              child: Text('price/units', textAlign: TextAlign.center),
+              //child: Text(currentTheme.backgroundColor.toString()),
+            ),
+          ]),
+          Visibility(
+            visible: showSecondRow,
+            maintainState: true,
+            child: AnimatedOpacity(
+              opacity: secondRowOpaque ? 1.0 : 0.0,
+              duration: Duration(milliseconds: animationDuration),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(hintText: 'Qty'),
+                        keyboardType: TextInputType.numberWithOptions(),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d+\.?\d*'))
+                        ],
+                        textInputAction: TextInputAction.next,
+                      ),
+                    )),
+                    Expanded(
+                        child: Container(
+                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(hintText: 'Item name'),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    )),
+                    Expanded(
+                        child: Container(
+                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(hintText: 'Unit name'),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    )),
+                  ]),
+            ),
           ),
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(hintText: 'Price \$'),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-            ],
-            textInputAction: TextInputAction.next,
-          )),
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(hintText: 'Units'),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-            ],
-            textInputAction: TextInputAction.next,
-          )),
-          Expanded(
-            child: Text('price/units', textAlign: TextAlign.center),
-          ),
-        ]),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(hintText: 'Qty'),
-            keyboardType: TextInputType.numberWithOptions(),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-            ],
-            textInputAction: TextInputAction.next,
-          )),
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(hintText: 'Item name'),
-            textInputAction: TextInputAction.next,
-          )),
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(hintText: 'Unit name'),
-            textInputAction: TextInputAction.next,
-          )),
-        ]),
-      ],
+        ],
+      ),
     ),
   );
 }
