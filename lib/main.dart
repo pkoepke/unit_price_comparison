@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
 import 'dart:async'; // For Timer class.
+//import 'package:shared_preferences/shared_preferences.dart';
 
 const animationDuration = 500;
 
@@ -47,6 +48,7 @@ ThemeData darkTheme = ThemeData(
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: dukeBlueMaterialColorSwatch,
+  backgroundColor: Colors.white,
 );
 
 ThemeData currentTheme = darkTheme;
@@ -58,6 +60,7 @@ void main() {
   runApp(MyApp());
 }
 
+//Original stateless root
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -69,6 +72,35 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Trying to add state to the root widget so we can switch the app's theme, but it threw an error like the widget wasn't in the tree:
+// >setState() called in constructor: _MyAppState#2268d(lifecycle state: created, no widget, not mounted)
+// >This happens when you call setState() on a State object for a widget that hasn't been inserted into the widget tree yet. It is not necessary to call setState() in the constructor, since the state is already assumed to be dirty when it is initially created.
+/*class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Unit Price Comparison',
+      theme: currentTheme,
+      home: MyHomePage(title: 'Unit Price Comparison'),
+    );
+  }
+
+  void swapTheme() {
+    setState(() {
+      if (currentTheme == darkTheme)
+        currentTheme = lightTheme;
+      else
+        currentTheme = darkTheme;
+    });
+  }
+}*/
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -125,6 +157,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void swapTheme() {
+    setState(() {
+      if (currentTheme == darkTheme)
+        currentTheme = lightTheme;
+      else
+        currentTheme = darkTheme;
+    });
+  }
+
   List<Widget> buildCardList(_cardCounter) {
     List<Widget> cardList = [];
     // Starts at 1 because there is no item zero.
@@ -134,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return cardList;
   }
 
-  void setTheme() {
+  void matchSystemTheme() {
     setState(() {
       currentTheme =
           MediaQuery.of(context).platformBrightness == Brightness.dark
@@ -145,69 +186,75 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    setTheme();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: dukeBlue,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.invert_colors_off),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.unfold_more), //unfold_less will be the opposite
-            onPressed: () {
-              showHideSecondRow();
-            },
-          ),
-        ],
-      ),
-      body: ListView(children: buildCardList(_cardCounter)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          /*FloatingActionButton(
-            onPressed: () {
-              // Add your onPressed code here!
-            },
-            child: Icon(Icons.invert_colors_off),
-            backgroundColor: dukeBlue,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              // Add your onPressed code here!
-            },
-            child: Icon(Icons.clear),
-            backgroundColor: Colors.red,
-          ),*/
-          FloatingActionButton(
-            onPressed: () {
-              removeCard();
-            },
-            child: Icon(
-              Icons.remove,
-              color: Colors.white,
+    //matchSystemTheme(); Won't run on every build, instead will default to dark theme and respect button pushes.
+    return Theme(
+      data: currentTheme,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          backgroundColor: dukeBlue,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.invert_colors_off),
+              onPressed: () {
+                //_MyAppState().swapTheme(); // Requires stateful root widget
+                swapTheme();
+              },
             ),
-            backgroundColor: dukeBlue,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              addCard();
-            },
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
+            IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () {},
             ),
-            backgroundColor: dukeBlue,
-          ),
-        ],
+            IconButton(
+              icon: Icon(Icons.unfold_more), //unfold_less will be the opposite
+              onPressed: () {
+                showHideSecondRow();
+              },
+            ),
+          ],
+        ),
+        body: ListView(children: buildCardList(_cardCounter)),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            /*FloatingActionButton(
+              onPressed: () {
+                // Add your onPressed code here!
+              },
+              child: Icon(Icons.invert_colors_off),
+              backgroundColor: dukeBlue,
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                // Add your onPressed code here!
+              },
+              child: Icon(Icons.clear),
+              backgroundColor: Colors.red,
+            ),*/
+            FloatingActionButton(
+              onPressed: () {
+                removeCard();
+              },
+              child: Icon(
+                Icons.remove,
+                color: Colors.white,
+              ),
+              backgroundColor: dukeBlue,
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                addCard();
+              },
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              backgroundColor: dukeBlue,
+            ),
+          ],
+        ),
       ),
     );
   }
