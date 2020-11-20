@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
 import 'dart:async'; // For Timer class.
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String testOutput = ""; // TODO remove this, it's just for testing
 
 const animationDuration = 500;
 
@@ -53,6 +55,11 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData currentTheme = darkTheme;
 //ThemeData currentTheme = lightTheme;
+
+void saveThemePref(String theme) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("theme", theme);
+}
 
 //void main() => runApp(MyApp());
 void main() {
@@ -115,6 +122,24 @@ class _MyHomePageState extends State<MyHomePage> {
   int _cardCounter = 5; // Starting number of cards
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
+  String _themePref = "dark";
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      _themePref = prefs.getString("theme") ?? "dark";
+      setState(() {
+        if (_themePref == "dark") {
+          currentTheme = darkTheme;
+          testOutput = _themePref;
+        } else {
+          currentTheme = lightTheme;
+          testOutput = _themePref;
+        }
+      });
+    });
+  }
 
   void addCard() {
     setState(() {
@@ -159,15 +184,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void swapTheme() {
     setState(() {
-      if (currentTheme == darkTheme)
+      if (currentTheme == darkTheme) {
         currentTheme = lightTheme;
-      else
+        saveThemePref("light");
+      } else {
         currentTheme = darkTheme;
+        saveThemePref("dark");
+      }
     });
   }
 
   List<Widget> buildCardList(_cardCounter) {
     List<Widget> cardList = [];
+    //cardList.add(Text(testOutput)); // TODO remove this, it's just for testing.
     // Starts at 1 because there is no item zero.
     for (int i = 1; i <= _cardCounter; i++) {
       cardList.add(makeItemCard(i, _showSecondRow, _secondRowOpaque));
@@ -197,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               icon: Icon(Icons.invert_colors_off),
               onPressed: () {
-                //_MyAppState().swapTheme(); // Requires stateful root widget
+                //_MyAppState().swapTheme(); // Requires stateful root widget, see 'class MyApp extends StatefulWidget'
                 swapTheme();
               },
             ),
