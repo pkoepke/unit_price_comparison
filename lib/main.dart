@@ -123,20 +123,23 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
+  List<TextEditingController> myControllers = []; //
 
   @override
   void initState() {
     super.initState();
+    // When the widget is created, get the last-used theme from preferences.
     SharedPreferences.getInstance().then((prefs) {
-      _themePref = prefs.getString("theme") ?? "dark";
+      _themePref = prefs.getString("theme") ??
+          getSystemTheme(); // If null then there's no recorded preference, so it's probably first launch. In that case match the system theme.
       setState(() {
         if (_themePref == "dark") {
           currentTheme = darkTheme;
-          testOutput = _themePref;
         } else {
           currentTheme = lightTheme;
-          testOutput = _themePref;
         }
+        saveThemePref(_themePref);
+        myControllers = buildTextEditingControllers(_cardCounter);
       });
     });
   }
@@ -144,6 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void addCard() {
     setState(() {
       _cardCounter++;
+      myControllers.add(new TextEditingController());
     });
   }
 
@@ -151,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_cardCounter > 2) {
       setState(() {
         _cardCounter--;
+        myControllers.removeLast();
       });
     }
   }
@@ -199,18 +204,145 @@ class _MyHomePageState extends State<MyHomePage> {
     //cardList.add(Text(testOutput)); // TODO remove this, it's just for testing.
     // Starts at 1 because there is no item zero.
     for (int i = 1; i <= _cardCounter; i++) {
-      cardList.add(makeItemCard(i, _showSecondRow, _secondRowOpaque));
+      cardList.add(makeItemCard(context, i, _showSecondRow, _secondRowOpaque));
     }
     return cardList;
   }
 
-  void matchSystemTheme() {
-    setState(() {
-      currentTheme =
-          MediaQuery.of(context).platformBrightness == Brightness.dark
-              ? darkTheme
-              : lightTheme;
+  String getSystemTheme() {
+    Brightness systemTheme = MediaQuery.of(context).platformBrightness;
+    if (systemTheme == Brightness.dark)
+      return "dark";
+    else
+      return "light";
+  }
+
+  //final myController = TextEditingController();
+  List<TextEditingController> buildTextEditingControllers(int cardNum) {
+    List<TextEditingController> myControllers = [];
+    for (int i = 0; i < _cardCounter; i++) {
+      myControllers.add(new TextEditingController());
+    }
+    return myControllers;
+  }
+
+  @override
+  void dispose() {
+    myControllers.forEach((controller) {
+      controller.dispose();
     });
+    super.dispose();
+  }
+
+  // For now, write output to the price/units field.
+  String displayOutput(int cardNum) {
+    //return myControllers[cardNum - 1].text ?? 'price/units';
+    if (myControllers[cardNum - 1].text == null) return 'price/units';
+  }
+
+  // Originally I delcared this function outside of the _MyHomePageState class and it worked fine.
+  Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow,
+      bool secondRowOpaque) {
+    return Card(
+      color: currentTheme.backgroundColor,
+      //color: Colors.grey[900],
+      child: Container(
+        margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 7.0),
+        child: Column(
+          children: [
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Expanded(
+                child: Text('Item $cardNum', textAlign: TextAlign.center),
+              ),
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 2.0, right: 2.0),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(hintText: 'Price \$'),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
+                      ],
+                      textInputAction: TextInputAction.next,
+                      controller: myControllers[cardNum - 1],
+                      //onChanged: ,
+                    ),
+                  )),
+              Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(hintText: 'Units'),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
+                      ],
+                      textInputAction: TextInputAction.next,
+                    ),
+                  )),
+              Expanded(
+                flex: 2,
+                child: Text(
+                    myControllers[cardNum - 1]
+                        .text /*displayOutput(cardNum)*/ /*'price/units'*/,
+                    textAlign: TextAlign.center),
+                //child: Text(currentTheme.backgroundColor.toString()),
+              ),
+            ]),
+            Visibility(
+              visible: showSecondRow,
+              maintainState: true,
+              child: AnimatedOpacity(
+                opacity: secondRowOpaque ? 1.0 : 0.0,
+                duration: Duration(milliseconds: animationDuration),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(hintText: 'Qty'),
+                          keyboardType: TextInputType.numberWithOptions(),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d*'))
+                          ],
+                          textInputAction: TextInputAction.next,
+                        ),
+                      )),
+                      Expanded(
+                          child: Container(
+                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(hintText: 'Item name'),
+                          textInputAction: TextInputAction.next,
+                        ),
+                      )),
+                      Expanded(
+                          child: Container(
+                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(hintText: 'Unit name'),
+                          textInputAction: TextInputAction.next,
+                        ),
+                      )),
+                    ]),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -287,103 +419,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
-
-Widget makeItemCard(int cardNum, bool showSecondRow, bool secondRowOpaque) {
-  return Card(
-    color: currentTheme
-        .backgroundColor, // TODO This occasionally fails and returns a light blue (almost Carolina blue!), might have to fix this up.
-    //color: Colors.grey[900],
-    child: Container(
-      margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 7.0),
-      child: Column(
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Expanded(
-              child: Text('Item $cardNum', textAlign: TextAlign.center),
-            ),
-            Expanded(
-                flex: 2,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 2.0, right: 2.0),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(hintText: 'Price \$'),
-                    keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-                    ],
-                    textInputAction: TextInputAction.next,
-                  ),
-                )),
-            Expanded(
-                flex: 2,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 2.0, right: 2.0),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(hintText: 'Units'),
-                    keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-                    ],
-                    textInputAction: TextInputAction.next,
-                  ),
-                )),
-            Expanded(
-              flex: 2,
-              child: Text('price/units', textAlign: TextAlign.center),
-              //child: Text(currentTheme.backgroundColor.toString()),
-            ),
-          ]),
-          Visibility(
-            visible: showSecondRow,
-            maintainState: true,
-            child: AnimatedOpacity(
-              opacity: secondRowOpaque ? 1.0 : 0.0,
-              duration: Duration(milliseconds: animationDuration),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(hintText: 'Qty'),
-                        keyboardType: TextInputType.numberWithOptions(),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d+\.?\d*'))
-                        ],
-                        textInputAction: TextInputAction.next,
-                      ),
-                    )),
-                    Expanded(
-                        child: Container(
-                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(hintText: 'Item name'),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    )),
-                    Expanded(
-                        child: Container(
-                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(hintText: 'Unit name'),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    )),
-                  ]),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
