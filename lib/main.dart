@@ -1,10 +1,14 @@
+// TODO launcher icons
+// TODO remove testing code
+// TODO shrink APK size
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
 import 'dart:async'; // For Timer class.
 import 'package:shared_preferences/shared_preferences.dart';
 
-String testOutput = ""; // TODO remove this, it's just for testing
+// String testOutput = ""; // just for testing
 
 const animationDuration = 500;
 
@@ -119,11 +123,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _cardCounter = 5; // Starting number of cards
+  int _cardCounter =
+      5; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0.
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
-  List<TextEditingController> myControllers = []; //
+  List<double> _allPrices = [];
+  List<double> _allUnits = [];
+  List<double> _allQtys = [];
+  List<double> _allPricePerUnits = [];
+  List<TextEditingController> _priceControllers = [];
+  List<TextEditingController> _unitControllers = [];
+  List<TextEditingController> _qtyControllers = [];
+  //List<Widget> _cardList = [SizedBox(height: 100.0)];
 
   @override
   void initState() {
@@ -139,15 +151,40 @@ class _MyHomePageState extends State<MyHomePage> {
           currentTheme = lightTheme;
         }
         saveThemePref(_themePref);
-        myControllers = buildTextEditingControllers(_cardCounter);
+        // Set lists to initial length so assignment below doesn't throw errors.
+        _allPrices = List<double>(_cardCounter);
+        _allUnits = List<double>(_cardCounter);
+        _allQtys = List<double>(_cardCounter);
+        _allPricePerUnits = List<double>(_cardCounter);
+        _priceControllers = buildTextEditingControllers(_cardCounter);
+        _unitControllers = buildTextEditingControllers(_cardCounter);
+        _qtyControllers = buildTextEditingControllers(_cardCounter);
+        //_cardList = buildCardList(_cardCounter);
       });
     });
+  }
+
+  List<Widget> buildCardList(_cardCounter) {
+    List<Widget> cardList = [];
+    //cardList.add(Text(testOutput)); // just for testing.
+    for (int i = 0; i < _cardCounter; i++) {
+      cardList.add(makeItemCard(context, i, _showSecondRow, _secondRowOpaque));
+    }
+    cardList.add(SizedBox(height: 80.0));
+    return cardList;
   }
 
   void addCard() {
     setState(() {
       _cardCounter++;
-      myControllers.add(new TextEditingController());
+      _allPrices = List<double>(_cardCounter);
+      _allUnits = List<double>(_cardCounter);
+      _allQtys = List<double>(_cardCounter);
+      _allPricePerUnits = List<double>(_cardCounter);
+      _priceControllers.add(new TextEditingController());
+      _unitControllers.add(new TextEditingController());
+      _qtyControllers.add(new TextEditingController());
+      doCalculations();
     });
   }
 
@@ -155,7 +192,14 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_cardCounter > 2) {
       setState(() {
         _cardCounter--;
-        myControllers.removeLast();
+        _allPrices = List<double>(_cardCounter);
+        _allUnits = List<double>(_cardCounter);
+        _allQtys = List<double>(_cardCounter);
+        _allPricePerUnits = List<double>(_cardCounter);
+        _priceControllers.removeLast();
+        _unitControllers.removeLast();
+        _qtyControllers.removeLast();
+        doCalculations();
       });
     }
   }
@@ -166,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _secondRowOpaque = !_secondRowOpaque;
       });
-      var timer = Timer(
+      Timer(
           Duration(milliseconds: animationDuration),
           () => setState(() {
                 _showSecondRow =
@@ -179,11 +223,6 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _secondRowOpaque = !_secondRowOpaque;
       });
-      /*var timer = Timer(
-          Duration(milliseconds: animationDuration),
-          () => setState(() {
-                _fadeSecondRowLabels = !_fadeSecondRowLabels;
-              }));*/
     }
   }
 
@@ -199,16 +238,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  List<Widget> buildCardList(_cardCounter) {
-    List<Widget> cardList = [];
-    //cardList.add(Text(testOutput)); // TODO remove this, it's just for testing.
-    // Starts at 1 because there is no item zero.
-    for (int i = 1; i <= _cardCounter; i++) {
-      cardList.add(makeItemCard(context, i, _showSecondRow, _secondRowOpaque));
-    }
-    return cardList;
-  }
-
   String getSystemTheme() {
     Brightness systemTheme = MediaQuery.of(context).platformBrightness;
     if (systemTheme == Brightness.dark)
@@ -217,32 +246,105 @@ class _MyHomePageState extends State<MyHomePage> {
       return "light";
   }
 
-  //final myController = TextEditingController();
+  void clearAll() {
+    setState(() {
+      _priceControllers.forEach((element) {
+        element.clear();
+      });
+      _unitControllers.forEach((element) {
+        element.clear();
+      });
+      _qtyControllers.forEach((element) {
+        element.clear();
+      });
+      _allPricePerUnits.forEach((element) {
+        element = null;
+      });
+    });
+  }
+
   List<TextEditingController> buildTextEditingControllers(int cardNum) {
-    List<TextEditingController> myControllers = [];
+    List<TextEditingController> textEditingControllerList = [];
     for (int i = 0; i < _cardCounter; i++) {
-      myControllers.add(new TextEditingController());
+      textEditingControllerList.add(new TextEditingController());
     }
-    return myControllers;
+    return textEditingControllerList;
   }
 
   @override
   void dispose() {
-    myControllers.forEach((controller) {
+    _priceControllers.forEach((controller) {
       controller.dispose();
     });
     super.dispose();
   }
 
-  // For now, write output to the price/units field.
-  String displayOutput(int cardNum) {
-    //return myControllers[cardNum - 1].text ?? 'price/units';
-    if (myControllers[cardNum - 1].text == null) return 'price/units';
+  TextEditingController getControllerSafely(
+      List<TextEditingController> controllerList, int cardNum) {
+    if (controllerList.asMap().containsKey(cardNum))
+      return controllerList[cardNum];
+    else
+      return null;
   }
 
-  // Originally I delcared this function outside of the _MyHomePageState class and it worked fine.
+  void doCalculations() {
+    setState(() {
+      for (int i = 0; i < _cardCounter; i++) {
+        if (_priceControllers[i].text != null &&
+            _priceControllers[i].text != '')
+          _allPrices[i] = double.parse(_priceControllers[i].text);
+        else
+          _allPrices[i] = null;
+        if (_unitControllers[i].text != null && _unitControllers[i].text != '')
+          _allUnits[i] = double.parse(_unitControllers[i].text);
+        else
+          _allUnits[i] = null;
+        if (_qtyControllers[i].text != null && _qtyControllers[i].text != '')
+          _allQtys[i] = double.parse(_qtyControllers[i].text);
+        else
+          _allQtys[i] = 1.0;
+        if ((_allPrices[i] is double) &&
+            (_allUnits[i] is double) &&
+            (_allQtys[i] is double)) {
+          _allPricePerUnits[i] = (_allPrices[i] / (_allUnits[i] * _allQtys[i]));
+        } else {
+          _allPricePerUnits[i] = null;
+        }
+      }
+      // just for testing
+      /*print(_allPrices[0]);
+      print(_allUnits[0]);
+      print(_allQtys[0]);
+      print(_allPricePerUnits[0]);
+      print(_priceControllers[0].text);
+      testOutput = _priceControllers[0].text;*/
+      //testOutput = "testOutput";
+    });
+  }
+
+  String showPricePerUnit(int i) {
+    if (_allPricePerUnits.asMap().containsKey(i) &&
+        _allPricePerUnits[i] != null)
+      return _allPricePerUnits[i].toStringAsFixed(3);
+    else
+      return 'price/units';
+  }
+
+  bool isLowestPrice(int cardNum) {
+    if (_allPricePerUnits.isEmpty) return false;
+    double lowest = 9999999999999999.9;
+    _allPricePerUnits.forEach((element) {
+      if ((element != null) && element < lowest) lowest = element;
+    });
+    if (_allPricePerUnits[cardNum] == lowest) return true;
+    return false;
+  }
+
+  // Originally I declared this function outside of the _MyHomePageState class and it worked fine.
   Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow,
       bool secondRowOpaque) {
+    int showCardNum = cardNum +
+        1; // cardNum is an array index so starts at 0. showCardNum is what we display to the user so it starts at 1 and is always 1 more than cardNum.
     return Card(
       color: currentTheme.backgroundColor,
       //color: Colors.grey[900],
@@ -250,51 +352,78 @@ class _MyHomePageState extends State<MyHomePage> {
         margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 7.0),
         child: Column(
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              Expanded(
-                child: Text('Item $cardNum', textAlign: TextAlign.center),
-              ),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 2.0, right: 2.0),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(hintText: 'Price \$'),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-                      ],
-                      textInputAction: TextInputAction.next,
-                      controller: myControllers[cardNum - 1],
-                      //onChanged: ,
+            Container(
+              height: 50,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text('Item $showCardNum',
+                          textAlign: TextAlign.center),
                     ),
-                  )),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 2.0, right: 2.0),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(hintText: 'Units'),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
-                      ],
-                      textInputAction: TextInputAction.next,
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 2.0, right: 2.0),
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(hintText: 'Price \$'),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d*'))
+                            ],
+                            textInputAction: TextInputAction.next,
+                            controller:
+                                getControllerSafely(_priceControllers, cardNum),
+                            onChanged: (text) {
+                              doCalculations();
+                            },
+                            //onChanged: ,
+                          ),
+                        )),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(hintText: 'Units'),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d*'))
+                            ],
+                            textInputAction: TextInputAction.next,
+                            controller:
+                                getControllerSafely(_unitControllers, cardNum),
+                            onChanged: (text) {
+                              doCalculations();
+                            },
+                          ),
+                        )),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        decoration: new BoxDecoration(
+                            color: isLowestPrice(cardNum)
+                                ? Colors.green
+                                : currentTheme.backgroundColor),
+                        child: Text(
+                          showPricePerUnit(cardNum),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              backgroundColor: isLowestPrice(cardNum)
+                                  ? Colors.green
+                                  : currentTheme.backgroundColor),
+                        ),
+                      ),
                     ),
-                  )),
-              Expanded(
-                flex: 2,
-                child: Text(
-                    myControllers[cardNum - 1]
-                        .text /*displayOutput(cardNum)*/ /*'price/units'*/,
-                    textAlign: TextAlign.center),
-                //child: Text(currentTheme.backgroundColor.toString()),
-              ),
-            ]),
+                  ]),
+            ),
             Visibility(
               visible: showSecondRow,
               maintainState: true,
@@ -316,6 +445,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                 RegExp(r'^\d+\.?\d*'))
                           ],
                           textInputAction: TextInputAction.next,
+                          controller:
+                              getControllerSafely(_qtyControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
                         ),
                       )),
                       Expanded(
@@ -364,7 +498,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             IconButton(
               icon: Icon(Icons.clear),
-              onPressed: () {},
+              onPressed: () {
+                clearAll();
+              },
             ),
             IconButton(
               icon: Icon(Icons.unfold_more), //unfold_less will be the opposite
