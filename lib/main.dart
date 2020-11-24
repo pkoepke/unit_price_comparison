@@ -1,9 +1,10 @@
-// TODO launcher icons
-// TODO remove testing code
+// TODO improve next button behavior
+// TODO make launcher icons round
+// TODO improve green highlighting color
 // TODO shrink APK size
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart'; // Material design
+import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
 import 'dart:async'; // For Timer class.
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,6 +52,14 @@ ThemeData darkTheme = ThemeData(
   backgroundColor: Colors.grey[900],
 );
 
+TextSelectionThemeData darkThemeTextSelection = TextSelectionThemeData(
+  cursorColor: Colors.white,
+  selectionColor: Colors.grey[700],
+  selectionHandleColor: Colors.white,
+);
+
+TextSelectionThemeData lightThemeTextSelection = TextSelectionThemeData();
+
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: dukeBlueMaterialColorSwatch,
@@ -58,7 +67,6 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData currentTheme = darkTheme;
-//ThemeData currentTheme = lightTheme;
 
 void saveThemePref(String theme) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -354,75 +362,84 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               height: 50,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text('Item $showCardNum',
-                          textAlign: TextAlign.center),
-                    ),
-                    Expanded(
-                        flex: 2,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 2.0, right: 2.0),
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(hintText: 'Price \$'),
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d*'))
-                            ],
-                            textInputAction: TextInputAction.next,
-                            controller:
-                                getControllerSafely(_priceControllers, cardNum),
-                            onChanged: (text) {
-                              doCalculations();
-                            },
-                            //onChanged: ,
-                          ),
-                        )),
-                    Expanded(
-                        flex: 2,
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 2.0, right: 2.0),
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(hintText: 'Units'),
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d*'))
-                            ],
-                            textInputAction: TextInputAction.next,
-                            controller:
-                                getControllerSafely(_unitControllers, cardNum),
-                            onChanged: (text) {
-                              doCalculations();
-                            },
-                          ),
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-                        decoration: new BoxDecoration(
-                            color: isLowestPrice(cardNum)
-                                ? Colors.green
-                                : currentTheme.backgroundColor),
-                        child: Text(
-                          showPricePerUnit(cardNum),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                      Widget>[
+                Expanded(
+                  child: Text('Item $showCardNum', textAlign: TextAlign.center),
+                ),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 2.0, right: 2.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme)
+                            ? darkThemeTextSelection
+                            : lightThemeTextSelection,
+                        child: TextField(
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              backgroundColor: isLowestPrice(cardNum)
-                                  ? Colors.green
-                                  : currentTheme.backgroundColor),
+                          decoration: InputDecoration(hintText: 'Price \$'),
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d*'))
+                          ],
+                          textInputAction: TextInputAction.next,
+                          controller:
+                              getControllerSafely(_priceControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
+                          //onChanged: ,
                         ),
                       ),
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme)
+                            ? darkThemeTextSelection
+                            : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(hintText: 'Units'),
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d*'))
+                          ],
+                          textInputAction: TextInputAction.next,
+                          controller:
+                              getControllerSafely(_unitControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
+                        ),
+                      ),
+                    )),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    decoration: new BoxDecoration(
+                        color: isLowestPrice(cardNum)
+                            ? Colors.green
+                            : currentTheme.backgroundColor),
+                    child: Text(
+                      showPricePerUnit(cardNum),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          backgroundColor: isLowestPrice(cardNum)
+                              ? Colors.green
+                              : currentTheme.backgroundColor),
                     ),
-                  ]),
+                  ),
+                ),
+              ]),
             ),
             Visibility(
               visible: showSecondRow,
@@ -436,38 +453,53 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                           child: Padding(
                         padding: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(hintText: 'Qty'),
-                          keyboardType: TextInputType.numberWithOptions(),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'^\d+\.?\d*'))
-                          ],
-                          textInputAction: TextInputAction.next,
-                          controller:
-                              getControllerSafely(_qtyControllers, cardNum),
-                          onChanged: (text) {
-                            doCalculations();
-                          },
+                        child: TextSelectionTheme(
+                          data: (currentTheme == darkTheme)
+                              ? darkThemeTextSelection
+                              : lightThemeTextSelection,
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(hintText: 'Qty'),
+                            keyboardType: TextInputType.numberWithOptions(),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d+\.?\d*'))
+                            ],
+                            textInputAction: TextInputAction.next,
+                            controller:
+                                getControllerSafely(_qtyControllers, cardNum),
+                            onChanged: (text) {
+                              doCalculations();
+                            },
+                          ),
                         ),
                       )),
                       Expanded(
                           child: Container(
                         margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(hintText: 'Item name'),
-                          textInputAction: TextInputAction.next,
+                        child: TextSelectionTheme(
+                          data: (currentTheme == darkTheme)
+                              ? darkThemeTextSelection
+                              : lightThemeTextSelection,
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(hintText: 'Item name'),
+                            textInputAction: TextInputAction.next,
+                          ),
                         ),
                       )),
                       Expanded(
                           child: Container(
                         margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(hintText: 'Unit name'),
-                          textInputAction: TextInputAction.next,
+                        child: TextSelectionTheme(
+                          data: (currentTheme == darkTheme)
+                              ? darkThemeTextSelection
+                              : lightThemeTextSelection,
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(hintText: 'Unit name'),
+                            textInputAction: TextInputAction.next,
+                          ),
                         ),
                       )),
                     ]),
