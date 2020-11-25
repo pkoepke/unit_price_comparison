@@ -32,9 +32,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.paulkoepke.unitpricecomparison"
+        // TODO remove the 2
+        //applicationId "com.paulkoepke.unitpricecomparison"
+        applicationId "com.paulkoepke.unitpricecomparison2"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -1,12 +1,11 @@
 // TODO improve next button behavior
 // TODO make launcher icons round
-// TODO improve green highlighting color
 // TODO shrink APK size
 
 import 'package:flutter/material.dart'; // Material design
 import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
-import 'dart:async'; // For Timer class.
+import 'dart:async'; // For Timer class
 import 'package:shared_preferences/shared_preferences.dart';
 
 // String testOutput = ""; // just for testing
@@ -18,8 +17,11 @@ Color hexToColor(String code) {
   return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
 }
 
-final dukeBlue = hexToColor("#001A57");
-final cardBackground = hexToColor("#424242");
+final Color dukeBlue = hexToColor('#001A57');
+final Color cardBackground = hexToColor('#424242');
+final Color greenHighlight = hexToColor('#17B468');
+final double bodyFontSize = 18;
+final double inputContentPadding = 12;
 
 // Create a MaterialColor swatch from a single color.
 // From https://medium.com/@filipvk/creating-a-custom-color-swatch-in-flutter-554bcdcb27f3
@@ -50,6 +52,17 @@ ThemeData darkTheme = ThemeData(
   primarySwatch: dukeBlueMaterialColorSwatch,
   scaffoldBackgroundColor: Colors.black,
   backgroundColor: Colors.grey[900],
+  textTheme: darkTextTheme,
+);
+
+TextTheme darkTextTheme = TextTheme(
+  bodyText2: darkTextStyle,
+);
+
+TextStyle darkTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: bodyFontSize,
+  //height: 1,
 );
 
 TextSelectionThemeData darkThemeTextSelection = TextSelectionThemeData(
@@ -58,15 +71,27 @@ TextSelectionThemeData darkThemeTextSelection = TextSelectionThemeData(
   selectionHandleColor: Colors.white,
 );
 
-TextSelectionThemeData lightThemeTextSelection = TextSelectionThemeData();
-
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: dukeBlueMaterialColorSwatch,
   backgroundColor: Colors.white,
+  textTheme: lightTextTheme,
+  scaffoldBackgroundColor: Colors.grey[200],
 );
 
+TextTheme lightTextTheme = TextTheme(
+  bodyText2: lightTextStyle,
+);
+
+TextStyle lightTextStyle = TextStyle(
+  //color: Colors.white, // Just for testing
+  fontSize: bodyFontSize,
+);
+
+TextSelectionThemeData lightThemeTextSelection = TextSelectionThemeData();
+
 ThemeData currentTheme = darkTheme;
+//TextStyle currentTextStyle = darkTextStyle;
 
 void saveThemePref(String theme) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -132,7 +157,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _cardCounter =
-      5; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0.
+      4; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0.
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
@@ -155,8 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         if (_themePref == "dark") {
           currentTheme = darkTheme;
+          //currentTextStyle = darkTextStyle;
         } else {
           currentTheme = lightTheme;
+          //currentTextStyle = lightTextStyle;
         }
         saveThemePref(_themePref);
         // Set lists to initial length so assignment below doesn't throw errors.
@@ -238,9 +265,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if (currentTheme == darkTheme) {
         currentTheme = lightTheme;
+        //currentTextStyle = lightTextStyle;
         saveThemePref("light");
       } else {
         currentTheme = darkTheme;
+        //currentTextStyle = darkTextStyle;
         saveThemePref("dark");
       }
     });
@@ -333,7 +362,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String showPricePerUnit(int i) {
     if (_allPricePerUnits.asMap().containsKey(i) &&
         _allPricePerUnits[i] != null)
-      return _allPricePerUnits[i].toStringAsFixed(3);
+      return '\$' + _allPricePerUnits[i].toStringAsFixed(3);
     else
       return 'price/units';
   }
@@ -357,16 +386,26 @@ class _MyHomePageState extends State<MyHomePage> {
       color: currentTheme.backgroundColor,
       //color: Colors.grey[900],
       child: Container(
-        margin: EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 7.0),
+        margin: EdgeInsets.only(
+            left: 2.0,
+            right: 2.0,
+            /*top: 2.0, bottom: 7.0*/
+            top: 2.0,
+            bottom: 5.0),
         child: Column(
           children: [
             Container(
-              height: 50,
+              height:
+                  36, // 50 was comfortable but meant fewer items on screen, 34 closely matches
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: <
                       Widget>[
                 Expanded(
-                  child: Text('Item $showCardNum', textAlign: TextAlign.center),
+                  child: Text(
+                    'Item $showCardNum',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
                 Expanded(
                     flex: 2,
@@ -378,7 +417,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(hintText: 'Price \$'),
+                          decoration: InputDecoration(
+                              hintText: 'Price \$',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          style: currentTheme.textTheme.bodyText2,
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [
@@ -405,9 +449,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(hintText: 'Units'),
+                          decoration: InputDecoration(
+                              hintText: 'Units',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
+                          style: currentTheme.textTheme.bodyText2,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp(r'^\d+\.?\d*'))
@@ -424,18 +473,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   flex: 2,
                   child: Container(
-                    padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    padding: EdgeInsets.only(top: 5.0, bottom: 3.0),
                     decoration: new BoxDecoration(
                         color: isLowestPrice(cardNum)
-                            ? Colors.green
+                            ? /*Colors.green*/ greenHighlight
                             : currentTheme.backgroundColor),
                     child: Text(
                       showPricePerUnit(cardNum),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          backgroundColor: isLowestPrice(cardNum)
-                              ? Colors.green
-                              : currentTheme.backgroundColor),
+                        backgroundColor: isLowestPrice(cardNum)
+                            ? /*Colors.green*/ greenHighlight
+                            : currentTheme.backgroundColor,
+                        color: isLowestPrice(cardNum)
+                            ? Colors.white
+                            : currentTheme.textTheme.bodyText2.color,
+                      ),
                     ),
                   ),
                 ),
@@ -444,65 +497,83 @@ class _MyHomePageState extends State<MyHomePage> {
             Visibility(
               visible: showSecondRow,
               maintainState: true,
-              child: AnimatedOpacity(
-                opacity: secondRowOpaque ? 1.0 : 0.0,
-                duration: Duration(milliseconds: animationDuration),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextSelectionTheme(
-                          data: (currentTheme == darkTheme)
-                              ? darkThemeTextSelection
-                              : lightThemeTextSelection,
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(hintText: 'Qty'),
-                            keyboardType: TextInputType.numberWithOptions(),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d+\.?\d*'))
-                            ],
-                            textInputAction: TextInputAction.next,
-                            controller:
-                                getControllerSafely(_qtyControllers, cardNum),
-                            onChanged: (text) {
-                              doCalculations();
-                            },
+              child: Container(
+                height: 36,
+                child: AnimatedOpacity(
+                  opacity: secondRowOpaque ? 1.0 : 0.0,
+                  duration: Duration(milliseconds: animationDuration),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Qty',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              keyboardType: TextInputType.numberWithOptions(),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d*'))
+                              ],
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  getControllerSafely(_qtyControllers, cardNum),
+                              onChanged: (text) {
+                                doCalculations();
+                              },
+                            ),
                           ),
-                        ),
-                      )),
-                      Expanded(
-                          child: Container(
-                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextSelectionTheme(
-                          data: (currentTheme == darkTheme)
-                              ? darkThemeTextSelection
-                              : lightThemeTextSelection,
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(hintText: 'Item name'),
-                            textInputAction: TextInputAction.next,
+                        )),
+                        Expanded(
+                            child: Container(
+                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Item name',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              textInputAction: TextInputAction.next,
+                            ),
                           ),
-                        ),
-                      )),
-                      Expanded(
-                          child: Container(
-                        margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                        child: TextSelectionTheme(
-                          data: (currentTheme == darkTheme)
-                              ? darkThemeTextSelection
-                              : lightThemeTextSelection,
-                          child: TextField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(hintText: 'Unit name'),
-                            textInputAction: TextInputAction.next,
+                        )),
+                        Expanded(
+                            child: Container(
+                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Unit name',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              textInputAction: TextInputAction.next,
+                            ),
                           ),
-                        ),
-                      )),
-                    ]),
+                        )),
+                      ]),
+                ),
               ),
             ),
           ],
