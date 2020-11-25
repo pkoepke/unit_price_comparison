@@ -104,7 +104,7 @@ void main() {
   runApp(MyApp());
 }
 
-//Original stateless root
+//Original stateless rootflo
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Unit Price Comparison',
       theme: currentTheme,
-      home: MyHomePage(title: 'Unit Price Comparison'),
+      home: MyHomePage(title: 'Unit Price' /*'Unit Price Comparison'*/),
     );
   }
 }
@@ -205,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
     for (int i = 0; i < _cardCounter; i++) {
       cardList.add(makeItemCard(context, i, _showSecondRow, _secondRowOpaque));
     }
-    cardList.add(SizedBox(height: 80.0));
+    /*cardList.add(SizedBox(height: 80.0));*/ // Only needed for floating action buttons, which were removed.
     return cardList;
   }
 
@@ -593,16 +593,21 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: dukeBlue,
           actions: [
             IconButton(
-              icon: Icon(Icons.invert_colors_off),
-              onPressed: () {
-                //_MyAppState().swapTheme(); // Requires stateful root widget, see 'class MyApp extends StatefulWidget'
-                swapTheme();
-              },
-            ),
-            IconButton(
               icon: Icon(Icons.clear),
               onPressed: () {
                 clearAll();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.remove), //unfold_less will be the opposite
+              onPressed: () {
+                removeCard();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                addCard();
               },
             ),
             IconButton(
@@ -611,28 +616,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 showHideSecondRow();
               },
             ),
+            IconButton(
+              icon: Icon(Icons.invert_colors_off),
+              onPressed: () {
+                //_MyAppState().swapTheme(); // Requires stateful root widget, see 'class MyApp extends StatefulWidget'
+                swapTheme();
+              },
+            ),
           ],
         ),
         body: ListView(children: buildCardList(_cardCounter)),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        /*floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            /*FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              child: Icon(Icons.invert_colors_off),
-              backgroundColor: dukeBlue,
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              child: Icon(Icons.clear),
-              backgroundColor: Colors.red,
-            ),*/
             FloatingActionButton(
               onPressed: () {
                 removeCard();
@@ -654,7 +652,7 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: dukeBlue,
             ),
           ],
-        ),
+        ),*/
       ),
     );
   }
