@@ -1,14 +1,16 @@
 // TODO improve next button behavior
 // TODO make launcher icons round
-// TODO shrink APK size
+// TODO post to Play store with "a new year means a new U...nits price comparison" in the release notes.
 
 import 'package:flutter/material.dart'; // Material design
 import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
 import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
 import 'dart:async'; // For Timer class
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+import 'dart:io'; // For Platform.localeName to get currency symbol based on system language.
 
-// String testOutput = ""; // just for testing
+//String testOutput = ""; // just for testing
 
 const animationDuration = 500;
 
@@ -157,7 +159,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _cardCounter =
-      4; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0.
+      6; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0. Old app had 6 cards and no way to add or remove.
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
@@ -169,6 +171,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<TextEditingController> _unitControllers = [];
   List<TextEditingController> _qtyControllers = [];
   //List<Widget> _cardList = [SizedBox(height: 100.0)];
+  // Get currency symbol based on system language.
+  String currencySymbol =
+      NumberFormat.simpleCurrency(locale: Platform.localeName).currencySymbol ??
+          '\$';
 
   @override
   void initState() {
@@ -297,6 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _allPricePerUnits.forEach((element) {
         element = null;
       });
+      doCalculations();
     });
   }
 
@@ -348,23 +355,20 @@ class _MyHomePageState extends State<MyHomePage> {
           _allPricePerUnits[i] = null;
         }
       }
-      // just for testing
-      /*print(_allPrices[0]);
-      print(_allUnits[0]);
-      print(_allQtys[0]);
-      print(_allPricePerUnits[0]);
-      print(_priceControllers[0].text);
-      testOutput = _priceControllers[0].text;*/
-      //testOutput = "testOutput";
     });
   }
 
   String showPricePerUnit(int i) {
     if (_allPricePerUnits.asMap().containsKey(i) &&
-        _allPricePerUnits[i] != null)
-      return '\$' + _allPricePerUnits[i].toStringAsFixed(3);
-    else
-      return 'price/units';
+        _allPricePerUnits[i] != null) {
+      return NumberFormat.simpleCurrency(
+        decimalDigits: 3,
+      ).format(
+        _allPricePerUnits[i],
+      );
+      return currencySymbol + _allPricePerUnits[i].toStringAsFixed(3);
+    } else
+      return currencySymbol + '/units';
   }
 
   bool isLowestPrice(int cardNum) {
@@ -418,7 +422,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: TextField(
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                              hintText: 'Price \$',
+                              hintText: 'Price ' + currencySymbol,
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
                               )),
