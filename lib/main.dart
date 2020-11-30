@@ -1,4 +1,5 @@
-// TODO make launcher icons round
+// TODO change app ID
+// TODO Change name for launcher
 // TODO post to Play store with "a new year means a new U...nits price comparison" in the release notes.
 
 import 'package:flutter/material.dart'; // Material design

@@ -32,7 +32,7 @@ dev_dependencies:
 
 # https://pub.dev/packages/flutter_launcher_icons
 flutter_icons:
-  android: "launcher_icon"
+  android: "ic_launcher"
   ios: true
   image_path: "assets/icons/unitPriceComparisonIcon.png"
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Modify this file to customize your launch splash screen -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/black" />
+    <!--<item android:drawable="@android:color/black" >-->
 
     <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launcher_icon" /> <!-- Shows an error because Flutter doesn't handle all Android resources properly, but builds just fine. -->
+        <!-- bitmap shows an error because Flutter doesn't handle all Android resources properly, but builds just fine. -->
+    <bitmap
+        android:gravity="center"
+        android:src="@drawable/splash_screen_icon" />
+        <!--android:src="@mipmap/launcher_icon" />-->
+        <!--android:src="@mipmap/ic_launcher" />-->
     </item>
 </layer-list>
