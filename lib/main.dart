@@ -1,5 +1,4 @@
-// TODO Change name for launcher
-// TODO post to Play store with "a new year means a new U...nits price comparison" in the release notes.
+// TODO release in Apple App Store.
 
 import 'package:flutter/material.dart'; // Material design
 import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
@@ -613,7 +612,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: ListView(children: buildCardList(_cardCounter)),
+        body: Center(child: Container(constraints: BoxConstraints(maxWidth: 900), child: ListView(children: buildCardList(_cardCounter)))),
         /*floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
