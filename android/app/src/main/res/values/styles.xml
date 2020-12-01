@@ -5,4 +5,9 @@
              Flutter draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
     </style>
+
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <!-- trying to prevent icon jump at the end of the splash screen -->
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
 </resources>
