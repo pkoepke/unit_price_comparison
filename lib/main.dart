@@ -113,6 +113,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Unit Price Comparison',
       theme: currentTheme,
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Unit Price' /*'Unit Price Comparison'*/),
     );
   }
@@ -137,21 +138,38 @@ class _MyHomePageState extends State<MyHomePage> {
   List<double> _allUnits = [];
   List<double> _allQtys = [];
   List<double> _allPricePerUnits = [];
-  List<TextEditingController> _priceControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _unitControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _qtyControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _itemNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _unitNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  List<TextEditingController> _priceControllers =
+      List<TextEditingController>.generate(
+          initialCards, (i) => TextEditingController());
+  List<TextEditingController> _unitControllers =
+      List<TextEditingController>.generate(
+          initialCards, (i) => TextEditingController());
+  List<TextEditingController> _qtyControllers =
+      List<TextEditingController>.generate(
+          initialCards, (i) => TextEditingController());
+  List<TextEditingController> _itemNameControllers =
+      List<TextEditingController>.generate(
+          initialCards, (i) => TextEditingController());
+  List<TextEditingController> _unitNameControllers =
+      List<TextEditingController>.generate(
+          initialCards, (i) => TextEditingController());
   //List<Widget> _cardList = [SizedBox(height: 100.0)];
   // Get currency symbol based on system language.
-  String currencySymbol = NumberFormat.simpleCurrency(locale: Platform.localeName).currencySymbol ?? '\$';
+  String currencySymbol =
+      NumberFormat.simpleCurrency(locale: Platform.localeName).currencySymbol ??
+          '\$';
 
   //List<FocusNode> _priceFocusNodes = [];
-  List<FocusNode> _priceFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  List<FocusNode> _unitFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  List<FocusNode> _qtyFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  List<FocusNode> _itemNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  List<FocusNode> _unitNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  List<FocusNode> _priceFocusNodes =
+      List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  List<FocusNode> _unitFocusNodes =
+      List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  List<FocusNode> _qtyFocusNodes =
+      List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  List<FocusNode> _itemNameFocusNodes =
+      List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  List<FocusNode> _unitNameFocusNodes =
+      List<FocusNode>.generate(initialCards, (i) => FocusNode());
 
   @override
   void initState() {
@@ -169,9 +187,12 @@ class _MyHomePageState extends State<MyHomePage> {
         saveThemePref(_themePref);
         // Set lists to initial length so assigning values doesn't throw errors.
         makeNumberLists();
-        _priceControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
-        _unitControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
-        _qtyControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
+        _priceControllers = List<TextEditingController>.generate(
+            _cardCounter, (i) => TextEditingController());
+        _unitControllers = List<TextEditingController>.generate(
+            _cardCounter, (i) => TextEditingController());
+        _qtyControllers = List<TextEditingController>.generate(
+            _cardCounter, (i) => TextEditingController());
         makeFocusNodes();
       });
     });
@@ -185,11 +206,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void makeFocusNodes() {
-    _priceFocusNodes = List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
-    _unitFocusNodes = List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
+    _priceFocusNodes =
+        List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
+    _unitFocusNodes =
+        List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
     _qtyFocusNodes = List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
-    _itemNameFocusNodes = List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
-    _unitNameFocusNodes = List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
+    _itemNameFocusNodes =
+        List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
+    _unitNameFocusNodes =
+        List<FocusNode>.generate(_cardCounter, (i) => FocusNode());
   }
 
   List<Widget> buildCardList(_cardCounter) {
@@ -237,7 +262,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Timer(
           Duration(milliseconds: animationDuration),
           () => setState(() {
-                _showSecondRow = _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
+                _showSecondRow =
+                    _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
               }));
     } else {
       setState(() {
@@ -303,7 +329,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // TODO test removing this, as constructor improvements probably make it unnecessary.
   // Had problems with errors caused by list items not existing at initial load, so this prevents those "list index doesn't exist" errors.
-  TextEditingController getControllerSafely(List<TextEditingController> controllerList, int cardNum) {
+  TextEditingController getControllerSafely(
+      List<TextEditingController> controllerList, int cardNum) {
     if (controllerList.asMap().containsKey(cardNum))
       return controllerList[cardNum];
     else
@@ -322,7 +349,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void doCalculations() {
     setState(() {
       for (int i = 0; i < _cardCounter; i++) {
-        if (_priceControllers[i].text != null && _priceControllers[i].text != '')
+        if (_priceControllers[i].text != null &&
+            _priceControllers[i].text != '')
           _allPrices[i] = double.parse(_priceControllers[i].text);
         else
           _allPrices[i] = null;
@@ -334,7 +362,9 @@ class _MyHomePageState extends State<MyHomePage> {
           _allQtys[i] = double.parse(_qtyControllers[i].text);
         else
           _allQtys[i] = 1.0;
-        if ((_allPrices[i] is double) && (_allUnits[i] is double) && (_allQtys[i] is double)) {
+        if ((_allPrices[i] is double) &&
+            (_allUnits[i] is double) &&
+            (_allQtys[i] is double)) {
           _allPricePerUnits[i] = (_allPrices[i] / (_allUnits[i] * _allQtys[i]));
         } else {
           _allPricePerUnits[i] = null;
@@ -344,7 +374,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String showPricePerUnit(int i) {
-    if (_allPricePerUnits.asMap().containsKey(i) && _allPricePerUnits[i] != null) {
+    if (_allPricePerUnits.asMap().containsKey(i) &&
+        _allPricePerUnits[i] != null) {
       return NumberFormat.simpleCurrency(
         decimalDigits: 3,
       ).format(
@@ -365,7 +396,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Originally I declared this function outside of the _MyHomePageState class and it worked fine.
-  Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow, bool secondRowOpaque) {
+  Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow,
+      bool secondRowOpaque) {
     int showCardNum = cardNum +
         1; // cardNum is an array index so starts at 0. showCardNum is what we display to the user so it starts at 1 and is always 1 more than cardNum.
     return Card(
@@ -381,8 +413,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Container(
-              height: 36, // 50 was comfortable but meant fewer items on screen, 34 closely matches
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              height:
+                  36, // 50 was comfortable but meant fewer items on screen, 34 closely matches
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: <
+                      Widget>[
                 Expanded(
                   child: Text(
                     'Item $showCardNum',
@@ -395,7 +430,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       margin: const EdgeInsets.only(left: 2.0, right: 2.0),
                       child: TextSelectionTheme(
-                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        data: (currentTheme == darkTheme)
+                            ? darkThemeTextSelection
+                            : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
@@ -404,17 +441,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                 bottom: inputContentPadding,
                               )),
                           style: currentTheme.textTheme.bodyText2,
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d*'))
+                          ],
                           textInputAction: TextInputAction.next,
-                          controller: getControllerSafely(_priceControllers, cardNum),
+                          controller:
+                              getControllerSafely(_priceControllers, cardNum),
                           onChanged: (text) {
                             doCalculations();
                           },
-                          focusNode: getFocusNodeSafely(_priceFocusNodes, cardNum),
+                          focusNode:
+                              getFocusNodeSafely(_priceFocusNodes, cardNum),
                           onSubmitted: (String str) {
                             //_priceFocusNodes[cardNum].unfocus();
-                            FocusScope.of(context).requestFocus(_unitFocusNodes[cardNum]);
+                            FocusScope.of(context)
+                                .requestFocus(_unitFocusNodes[cardNum]);
                           },
                         ),
                       ),
@@ -424,7 +468,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       padding: const EdgeInsets.only(left: 2.0, right: 2.0),
                       child: TextSelectionTheme(
-                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        data: (currentTheme == darkTheme)
+                            ? darkThemeTextSelection
+                            : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
@@ -432,11 +478,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
                               )),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
                           style: currentTheme.textTheme.bodyText2,
-                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d+\.?\d*'))
+                          ],
                           textInputAction: TextInputAction.next,
-                          controller: getControllerSafely(_unitControllers, cardNum),
+                          controller:
+                              getControllerSafely(_unitControllers, cardNum),
                           onChanged: (text) {
                             doCalculations();
                           },
@@ -444,12 +495,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           onSubmitted: (String str) {
                             // TODO instead of returning to the first field, make the textInputAction done or similar so the keyboard disappears.
                             if (_showSecondRow) {
-                              FocusScope.of(context).requestFocus(_qtyFocusNodes[cardNum]);
+                              FocusScope.of(context)
+                                  .requestFocus(_qtyFocusNodes[cardNum]);
                             } else {
                               if (cardNum == _cardCounter - 1) {
-                                FocusScope.of(context).requestFocus(_priceFocusNodes[0]);
+                                FocusScope.of(context)
+                                    .requestFocus(_priceFocusNodes[0]);
                               } else {
-                                FocusScope.of(context).requestFocus(_priceFocusNodes[cardNum + 1]);
+                                FocusScope.of(context).requestFocus(
+                                    _priceFocusNodes[cardNum + 1]);
                               }
                             }
                           },
@@ -461,13 +515,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 2,
                   child: Container(
                     padding: EdgeInsets.only(top: 5.0, bottom: 3.0),
-                    decoration: new BoxDecoration(color: isLowestPrice(cardNum) ? /*Colors.green*/ greenHighlight : currentTheme.backgroundColor),
+                    decoration: new BoxDecoration(
+                        color: isLowestPrice(cardNum)
+                            ? /*Colors.green*/ greenHighlight
+                            : currentTheme.backgroundColor),
                     child: Text(
                       showPricePerUnit(cardNum),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        backgroundColor: isLowestPrice(cardNum) ? /*Colors.green*/ greenHighlight : currentTheme.backgroundColor,
-                        color: isLowestPrice(cardNum) ? Colors.white : currentTheme.textTheme.bodyText2.color,
+                        backgroundColor: isLowestPrice(cardNum)
+                            ? /*Colors.green*/ greenHighlight
+                            : currentTheme.backgroundColor,
+                        color: isLowestPrice(cardNum)
+                            ? Colors.white
+                            : currentTheme.textTheme.bodyText2.color,
                       ),
                     ),
                   ),
@@ -482,84 +543,102 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: AnimatedOpacity(
                   opacity: secondRowOpaque ? 1.0 : 0.0,
                   duration: Duration(milliseconds: animationDuration),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextSelectionTheme(
-                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                              hintText: 'Qty',
-                              contentPadding: EdgeInsets.only(
-                                bottom: inputContentPadding,
-                              )),
-                          style: currentTheme.textTheme.bodyText2,
-                          keyboardType: TextInputType.numberWithOptions(),
-                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
-                          textInputAction: TextInputAction.next,
-                          controller: getControllerSafely(_qtyControllers, cardNum),
-                          onChanged: (text) {
-                            doCalculations();
-                          },
-                          focusNode: _qtyFocusNodes[cardNum],
-                          onSubmitted: (String str) {
-                            FocusScope.of(context).requestFocus(_itemNameFocusNodes[cardNum]);
-                          },
-                        ),
-                      ),
-                    )),
-                    Expanded(
-                        child: Container(
-                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextSelectionTheme(
-                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                              hintText: 'Item name',
-                              contentPadding: EdgeInsets.only(
-                                bottom: inputContentPadding,
-                              )),
-                          style: currentTheme.textTheme.bodyText2,
-                          textInputAction: TextInputAction.next,
-                          controller: getControllerSafely(_itemNameControllers, cardNum),
-                          focusNode: _itemNameFocusNodes[cardNum],
-                          onSubmitted: (String str) {
-                            FocusScope.of(context).requestFocus(_unitNameFocusNodes[cardNum]);
-                          },
-                        ),
-                      ),
-                    )),
-                    Expanded(
-                        child: Container(
-                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                      child: TextSelectionTheme(
-                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                              hintText: 'Unit name',
-                              contentPadding: EdgeInsets.only(
-                                bottom: inputContentPadding,
-                              )),
-                          style: currentTheme.textTheme.bodyText2,
-                          textInputAction: TextInputAction.next,
-                          controller: getControllerSafely(_unitNameControllers, cardNum),
-                          focusNode: _unitNameFocusNodes[cardNum],
-                          onSubmitted: (String str) {
-                            // TODO instead of returning to the top, make textInputAction Done or similar so the keyboard just disappears.
-                            if (cardNum == _cardCounter - 1) {
-                              FocusScope.of(context).requestFocus(_priceFocusNodes[0]);
-                            } else {
-                              FocusScope.of(context).requestFocus(_priceFocusNodes[cardNum + 1]);
-                            }
-                          },
-                        ),
-                      ),
-                    )),
-                  ]),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Qty',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              keyboardType: TextInputType.numberWithOptions(),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'^\d+\.?\d*'))
+                              ],
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  getControllerSafely(_qtyControllers, cardNum),
+                              onChanged: (text) {
+                                doCalculations();
+                              },
+                              focusNode: _qtyFocusNodes[cardNum],
+                              onSubmitted: (String str) {
+                                FocusScope.of(context)
+                                    .requestFocus(_itemNameFocusNodes[cardNum]);
+                              },
+                            ),
+                          ),
+                        )),
+                        Expanded(
+                            child: Container(
+                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Item name',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              textInputAction: TextInputAction.next,
+                              controller: getControllerSafely(
+                                  _itemNameControllers, cardNum),
+                              focusNode: _itemNameFocusNodes[cardNum],
+                              onSubmitted: (String str) {
+                                FocusScope.of(context)
+                                    .requestFocus(_unitNameFocusNodes[cardNum]);
+                              },
+                            ),
+                          ),
+                        )),
+                        Expanded(
+                            child: Container(
+                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                          child: TextSelectionTheme(
+                            data: (currentTheme == darkTheme)
+                                ? darkThemeTextSelection
+                                : lightThemeTextSelection,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                  hintText: 'Unit name',
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: inputContentPadding,
+                                  )),
+                              style: currentTheme.textTheme.bodyText2,
+                              textInputAction: TextInputAction.next,
+                              controller: getControllerSafely(
+                                  _unitNameControllers, cardNum),
+                              focusNode: _unitNameFocusNodes[cardNum],
+                              onSubmitted: (String str) {
+                                // TODO instead of returning to the top, make textInputAction Done or similar so the keyboard just disappears.
+                                if (cardNum == _cardCounter - 1) {
+                                  FocusScope.of(context)
+                                      .requestFocus(_priceFocusNodes[0]);
+                                } else {
+                                  FocusScope.of(context).requestFocus(
+                                      _priceFocusNodes[cardNum + 1]);
+                                }
+                              },
+                            ),
+                          ),
+                        )),
+                      ]),
                 ),
               ),
             ),
@@ -612,7 +691,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: Center(child: Container(constraints: BoxConstraints(maxWidth: 900), child: ListView(children: buildCardList(_cardCounter)))),
+        body: Center(
+            child: Container(
+                constraints: BoxConstraints(maxWidth: 900),
+                child: ListView(children: buildCardList(_cardCounter)))),
         /*floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
