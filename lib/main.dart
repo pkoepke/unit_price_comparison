@@ -1,21 +1,19 @@
-// TODO release in Apple App Store.
+// TODO: add Windows desktop support. Maybe Linux too.
+// TODO: clean up Git repo, add new files as appropriate and remove files that shouldn't be committed.
 
-import 'package:flutter/material.dart'; // Material design
-import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
-import 'package:flutter/rendering.dart'; // For debugPaintSizeEnabled
+import 'package:intl/intl.dart'; // for NumberFormat.simpleCurrency
 import 'dart:async'; // For Timer class
+import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
+import 'dart:ui'; // For window.locale
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart'; // For local currency symbol support.
-import 'dart:io'; // For Platform.localeName to get currency symbol based on system language.
-
-//String testOutput = ""; // just for testing
 
 const initialCards = 6;
 const animationDuration = 500;
 
 /// Construct a color from a hex code string, of the format #RRGGBB.
 Color hexToColor(String code) {
-  return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
 }
 
 final Color dukeBlue = hexToColor('#001A57');
@@ -28,13 +26,14 @@ const double inputContentPadding = 12;
 // From https://medium.com/@filipvk/creating-a-custom-color-swatch-in-flutter-554bcdcb27f3
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];
-  Map swatch = <int, Color>{};
+  Map<int, Color> swatch = <int, Color>{};
   final int r = color.red, g = color.green, b = color.blue;
 
   for (int i = 1; i < 10; i++) {
     strengths.add(0.1 * i);
   }
-  strengths.forEach((strength) {
+  //strengths.forEach((strength) {});
+  for (var strength in strengths) {
     final double ds = 0.5 - strength;
     swatch[(strength * 1000).round()] = Color.fromRGBO(
       r + ((ds < 0 ? r : (255 - r)) * ds).round(),
@@ -42,7 +41,7 @@ MaterialColor createMaterialColor(Color color) {
       b + ((ds < 0 ? b : (255 - b)) * ds).round(),
       1,
     );
-  });
+  }
   return MaterialColor(color.value, swatch);
 }
 
@@ -54,13 +53,16 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black,
   backgroundColor: Colors.grey[900],
   textTheme: darkTextTheme,
+  appBarTheme: AppBarTheme(
+    color: dukeBlue,
+  ),
 );
 
 TextTheme darkTextTheme = TextTheme(
   bodyText2: darkTextStyle,
 );
 
-TextStyle darkTextStyle = TextStyle(
+TextStyle darkTextStyle = const TextStyle(
   color: Colors.white,
   fontSize: bodyFontSize,
   //height: 1,
@@ -78,18 +80,21 @@ ThemeData lightTheme = ThemeData(
   backgroundColor: Colors.white,
   textTheme: lightTextTheme,
   scaffoldBackgroundColor: Colors.grey[200],
+  appBarTheme: AppBarTheme(
+    color: dukeBlue,
+  ),
 );
 
 TextTheme lightTextTheme = TextTheme(
   bodyText2: lightTextStyle,
 );
 
-TextStyle lightTextStyle = TextStyle(
-  //color: Colors.white, // Just for testing
+TextStyle lightTextStyle = const TextStyle(
+  color: Colors.black, // Just for testing
   fontSize: bodyFontSize,
 );
 
-TextSelectionThemeData lightThemeTextSelection = TextSelectionThemeData();
+TextSelectionThemeData lightThemeTextSelection = const TextSelectionThemeData();
 
 ThemeData currentTheme = darkTheme;
 //TextStyle currentTextStyle = darkTextStyle;
@@ -99,75 +104,85 @@ void saveThemePref(String theme) async {
   prefs.setString("theme", theme);
 }
 
-//void main() => runApp(MyApp());
 void main() {
   //debugPaintSizeEnabled = true;
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-//Original stateless rootflo
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Unit Price Comparison',
       theme: currentTheme,
-      home: MyHomePage(title: 'Unit Price' /*'Unit Price Comparison'*/),
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(title: 'Unit Price' /*'Unit Price Comparison'*/),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _cardCounter =
-      initialCards; // Starting number of cards. Counts from 1 up so it matches the number shown on the cards, is not an array index which would start at 0. Old app had 6 cards and no way to add or remove.
+  int _cardCounter = initialCards; // Starting number of cards. Counts up from 1, not 0, so it matches the number shown on the cards.
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
+
+  // Make empty Lists to hold values.
   List<double> _allPrices = [];
   List<double> _allUnits = [];
   List<double> _allQtys = [];
   List<double> _allPricePerUnits = [];
+
+  // Make controllers for text fields.
   List<TextEditingController> _priceControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
   List<TextEditingController> _unitControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
   List<TextEditingController> _qtyControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _itemNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  List<TextEditingController> _unitNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
-  //List<Widget> _cardList = [SizedBox(height: 100.0)];
-  // Get currency symbol based on system language.
-  String currencySymbol = NumberFormat.simpleCurrency(locale: Platform.localeName).currencySymbol ?? '\$';
+  final List<TextEditingController> _itemNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  final List<TextEditingController> _unitNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
 
-  //List<FocusNode> _priceFocusNodes = [];
+  // Make Lists to hold FocusNodes, which handle keyboard focus.
   List<FocusNode> _priceFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
   List<FocusNode> _unitFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
   List<FocusNode> _qtyFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
   List<FocusNode> _itemNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
   List<FocusNode> _unitNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
 
+  // Set a default locale and currency. Later the system's preferred locale and currency during initState();
+  String currentLocale = "en_US";
+  String currencySymbol = "\$"; // ?? '\$';*/
+
   @override
   void initState() {
     super.initState();
+
+    // Try to get the platform locales and currency symbol. If this fails keep en_US and $ as defaults. Should't fail but Platform.localeName didn't work on web so who knows.
+    try {
+      //https://stackoverflow.com/a/62825776/3784441
+      currentLocale = window.locale.toString(); // replaced Platform.localeName with window.locale since the latter works on all platforms including web.
+      currencySymbol = NumberFormat.simpleCurrency(locale: currentLocale).currencySymbol;
+    } catch (e) {
+      currentLocale = "en_US"; // Doesn't do anything except avoid warnings about empty catch blocks.
+    }
+
     // When the widget is created, get the last-used theme from preferences.
     SharedPreferences.getInstance().then((prefs) {
       _themePref = prefs.getString("theme") ??
           getSystemTheme(); // If null then there's no recorded preference, so it's probably first launch. In that case match the system theme.
       setState(() {
-        if (_themePref == "dark") {
-          currentTheme = darkTheme;
-        } else {
-          currentTheme = lightTheme;
-        }
+        _themePref == "dark" ? currentTheme = darkTheme : currentTheme = lightTheme;
         saveThemePref(_themePref);
-        // Set lists to initial length so assigning values doesn't throw errors.
+
+        // Set lists of controllers to initial lengths so assigning values doesn't throw errors.
         makeNumberLists();
         _priceControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
         _unitControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
@@ -177,11 +192,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // Makes lists to hold values that will be used in calculations. All values are initialized to -1 since null is no longer allowed, and the app doesn't support negative numbers so -1 is effectively null.
   void makeNumberLists() {
-    _allPrices = List<double>(_cardCounter);
-    _allUnits = List<double>(_cardCounter);
-    _allQtys = List<double>(_cardCounter);
-    _allPricePerUnits = List<double>(_cardCounter);
+    _allPrices = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true); // was _allPrices = List<double>(_cardCounter);
+    _allUnits = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true); // was _allUnits = List<double>(_cardCounter);
+    _allQtys = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true); // was _allQtys = List<double>(_cardCounter);
+    _allPricePerUnits = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true); // was _allPricePerUnits = List<double>(_cardCounter);
   }
 
   void makeFocusNodes() {
@@ -206,11 +222,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _cardCounter++;
       makeNumberLists();
-      _priceControllers.add(new TextEditingController());
-      _unitControllers.add(new TextEditingController());
-      _qtyControllers.add(new TextEditingController());
+      _priceControllers.add(TextEditingController());
+      _unitControllers.add(TextEditingController());
+      _qtyControllers.add(TextEditingController());
       makeFocusNodes();
-      doCalculations();
     });
   }
 
@@ -223,19 +238,19 @@ class _MyHomePageState extends State<MyHomePage> {
         _unitControllers.removeLast();
         _qtyControllers.removeLast();
         makeFocusNodes();
-        doCalculations();
+        doCalculations(); // run again in case there's a new lowest price to highlight.
       });
     }
   }
 
   void showHideSecondRow() {
-    // Delay hiding the second row if it's shown to allow the fade out to finish.
+    // If the second row is visible, delay hiding it to allow the fade out to finish.
     if (_showSecondRow) {
       setState(() {
         _secondRowOpaque = !_secondRowOpaque;
       });
       Timer(
-          Duration(milliseconds: animationDuration),
+          const Duration(milliseconds: animationDuration),
           () => setState(() {
                 _showSecondRow = _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
               }));
@@ -265,103 +280,140 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String getSystemTheme() {
     Brightness systemTheme = MediaQuery.of(context).platformBrightness;
-    if (systemTheme == Brightness.dark)
+    if (systemTheme == Brightness.dark) {
       return "dark";
-    else
+    } else {
       return "light";
+    }
   }
 
   void clearAll() {
     setState(() {
-      _priceControllers.forEach((e) => e.clear());
-      _unitControllers.forEach((e) => e.clear());
-      _qtyControllers.forEach((e) => e.clear());
-      _itemNameControllers.forEach((e) => e.clear());
-      _unitNameControllers.forEach((e) => e.clear());
-      doCalculations(); // Necessary - simplest way to clear price per units output fields.
+      for (var e in _priceControllers) {
+        e.clear();
+      }
+      for (var e in _unitControllers) {
+        e.clear();
+      }
+      for (var e in _qtyControllers) {
+        e.clear();
+      }
+      for (var e in _itemNameControllers) {
+        e.clear();
+      }
+      for (var e in _unitNameControllers) {
+        e.clear();
+      }
+      doCalculations(); // Simplest way to clear price per units output fields.
     });
   }
 
   List<TextEditingController> buildTextEditingControllers(int cardNum) {
     List<TextEditingController> textEditingControllerList = [];
     for (int i = 0; i < _cardCounter; i++) {
-      textEditingControllerList.add(new TextEditingController());
+      textEditingControllerList.add(TextEditingController());
     }
     return textEditingControllerList;
   }
 
+  // Mandatory to release memory.
   @override
   void dispose() {
-    _priceControllers.forEach((controller) => controller.dispose());
-    _priceFocusNodes.forEach((e) => e.dispose());
-    _unitFocusNodes.forEach((e) => e.dispose());
-    _qtyFocusNodes.forEach((e) => e.dispose());
-    _itemNameFocusNodes.forEach((e) => e.dispose());
-    _unitNameFocusNodes.forEach((e) => e.dispose());
+    for (var controller in _priceControllers) {
+      controller.dispose();
+    }
+    for (var e in _priceFocusNodes) {
+      e.dispose();
+    }
+    for (var e in _unitFocusNodes) {
+      e.dispose();
+    }
+    for (var e in _qtyFocusNodes) {
+      e.dispose();
+    }
+    for (var e in _itemNameFocusNodes) {
+      e.dispose();
+    }
+    for (var e in _unitNameFocusNodes) {
+      e.dispose();
+    }
     super.dispose();
   }
 
   // TODO test removing this, as constructor improvements probably make it unnecessary.
   // Had problems with errors caused by list items not existing at initial load, so this prevents those "list index doesn't exist" errors.
   TextEditingController getControllerSafely(List<TextEditingController> controllerList, int cardNum) {
-    if (controllerList.asMap().containsKey(cardNum))
+    if (controllerList.asMap().containsKey(cardNum)) {
       return controllerList[cardNum];
-    else
-      return null;
+    } else {
+      return TextEditingController(); // If the controller doesn't exist yet, return a useless placeholder to avoid errors until the useful ones are created.
+    }
   }
 
   // TODO test removing this, as constructor improvements probably make it unnecessary.
   // Had problems with errors caused by list items not existing at initial load, so this prevents those "list index doesn't exist" errors.
   FocusNode getFocusNodeSafely(List<FocusNode> focusNodeList, int cardNum) {
-    if (focusNodeList.asMap().containsKey(cardNum))
+    if (focusNodeList.asMap().containsKey(cardNum)) {
       return focusNodeList[cardNum];
-    else
-      return null;
+    } else {
+      return FocusNode(); // If the node doesn't exist yet, return a useless placeholder to avoid errors until the useful ones are created.
+    }
   }
 
+  // -1 replaces null to signal "ignore this card" when displaying price per unit.
   void doCalculations() {
     setState(() {
       for (int i = 0; i < _cardCounter; i++) {
-        if (_priceControllers[i].text != null && _priceControllers[i].text != '')
+        if (_priceControllers[i].text.isNotEmpty) {
           _allPrices[i] = double.parse(_priceControllers[i].text);
-        else
-          _allPrices[i] = null;
-        if (_unitControllers[i].text != null && _unitControllers[i].text != '')
+        } else {
+          _allPrices[i] = -1;
+        }
+        if (_unitControllers[i].text.isNotEmpty) {
           _allUnits[i] = double.parse(_unitControllers[i].text);
-        else
-          _allUnits[i] = null;
-        if (_qtyControllers[i].text != null && _qtyControllers[i].text != '')
+        } else {
+          _allUnits[i] = -1;
+        }
+        if (_qtyControllers[i].text.isNotEmpty) {
           _allQtys[i] = double.parse(_qtyControllers[i].text);
-        else
+        } else {
           _allQtys[i] = 1.0;
-        if ((_allPrices[i] is double) && (_allUnits[i] is double) && (_allQtys[i] is double)) {
+        }
+        if ((_allPrices[i] >= 0) && (_allUnits[i] >= 0) && (_allQtys[i] >= 0)) {
           _allPricePerUnits[i] = (_allPrices[i] / (_allUnits[i] * _allQtys[i]));
         } else {
-          _allPricePerUnits[i] = null;
+          _allPricePerUnits[i] = -1;
         }
       }
     });
   }
 
   String showPricePerUnit(int i) {
-    if (_allPricePerUnits.asMap().containsKey(i) && _allPricePerUnits[i] != null) {
+    if (_allPricePerUnits.asMap().containsKey(i) && _allPricePerUnits[i] >= 0) {
       return NumberFormat.simpleCurrency(
+        locale: currentLocale,
         decimalDigits: 3,
       ).format(
         _allPricePerUnits[i],
       );
-    } else
+    } else {
       return currencySymbol + '/units';
+    }
   }
 
+  /*TODO: make this run just once when doCalculations() runs and store the value, rather than running once per card.
+     Current setup highlights multiple cards if they have the same value so probably use _allPricePerUnits.reduce(min) from dart:math and store that value. */
   bool isLowestPrice(int cardNum) {
     if (_allPricePerUnits.isEmpty) return false;
     double lowest = 9999999999999999.9;
-    _allPricePerUnits.forEach((element) {
-      if ((element != null) && element < lowest) lowest = element;
-    });
-    if (_allPricePerUnits[cardNum] == lowest) return true;
-    return false;
+    for (var element in _allPricePerUnits) {
+      if ((element >= 0) && element < lowest) lowest = element;
+    }
+    if (_allPricePerUnits[cardNum] == lowest) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Originally I declared this function outside of the _MyHomePageState class and it worked fine.
@@ -370,24 +422,18 @@ class _MyHomePageState extends State<MyHomePage> {
         1; // cardNum is an array index so starts at 0. showCardNum is what we display to the user so it starts at 1 and is always 1 more than cardNum.
     return Card(
       color: currentTheme.backgroundColor,
-      //color: Colors.grey[900],
       child: Container(
-        margin: EdgeInsets.only(
-            left: 2.0,
-            right: 2.0,
-            /*top: 2.0, bottom: 7.0*/
-            top: 2.0,
-            bottom: 5.0),
+        margin: const EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 5.0),
         child: Column(
           children: [
-            Container(
-              height: 36, // 50 was comfortable but meant fewer items on screen, 34 closely matches
+            SizedBox(
+              height: 36, // 50 was comfortable but meant fewer items on screen
               child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
                 Expanded(
                   child: Text(
                     'Item $showCardNum',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                 ),
                 Expanded(
@@ -400,11 +446,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               hintText: 'Price ' + currencySymbol,
-                              contentPadding: EdgeInsets.only(
+                              contentPadding: const EdgeInsets.only(
                                 bottom: inputContentPadding,
                               )),
                           style: currentTheme.textTheme.bodyText2,
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
                           textInputAction: TextInputAction.next,
                           controller: getControllerSafely(_priceControllers, cardNum),
@@ -427,12 +473,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Units',
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
                               )),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           style: currentTheme.textTheme.bodyText2,
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
                           textInputAction: TextInputAction.next,
@@ -460,14 +506,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   flex: 2,
                   child: Container(
-                    padding: EdgeInsets.only(top: 5.0, bottom: 3.0),
-                    decoration: new BoxDecoration(color: isLowestPrice(cardNum) ? /*Colors.green*/ greenHighlight : currentTheme.backgroundColor),
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 3.0),
+                    decoration: BoxDecoration(color: isLowestPrice(cardNum) ? greenHighlight : currentTheme.backgroundColor),
                     child: Text(
                       showPricePerUnit(cardNum),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        backgroundColor: isLowestPrice(cardNum) ? /*Colors.green*/ greenHighlight : currentTheme.backgroundColor,
-                        color: isLowestPrice(cardNum) ? Colors.white : currentTheme.textTheme.bodyText2.color,
+                        backgroundColor: isLowestPrice(cardNum) ? greenHighlight : currentTheme.backgroundColor,
+                        color: isLowestPrice(cardNum) ? Colors.white : currentTheme.textTheme.bodyText2?.color,
                       ),
                     ),
                   ),
@@ -477,11 +523,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Visibility(
               visible: showSecondRow,
               maintainState: true,
-              child: Container(
+              child: SizedBox(
                 height: 36,
                 child: AnimatedOpacity(
                   opacity: secondRowOpaque ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: animationDuration),
+                  duration: const Duration(milliseconds: animationDuration),
                   child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
                     Expanded(
                         child: Padding(
@@ -490,13 +536,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Qty',
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
                               )),
                           style: currentTheme.textTheme.bodyText2,
-                          keyboardType: TextInputType.numberWithOptions(),
+                          keyboardType: const TextInputType.numberWithOptions(),
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))],
                           textInputAction: TextInputAction.next,
                           controller: getControllerSafely(_qtyControllers, cardNum),
@@ -517,7 +563,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Item name',
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
@@ -539,7 +585,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
                         child: TextField(
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Unit name',
                               contentPadding: EdgeInsets.only(
                                 bottom: inputContentPadding,
@@ -571,7 +617,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //matchSystemTheme(); Won't run on every build, instead will default to dark theme and respect button pushes.
     return Theme(
       data: currentTheme,
       child: Scaffold(
@@ -580,40 +625,40 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: dukeBlue,
           actions: [
             IconButton(
-              icon: Icon(Icons.clear),
+              icon: const Icon(Icons.clear),
               onPressed: () {
                 clearAll();
               },
             ),
             IconButton(
-              icon: Icon(Icons.remove), //unfold_less will be the opposite
+              icon: const Icon(Icons.remove), //unfold_less will be the opposite
               onPressed: () {
                 removeCard();
               },
             ),
             IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: () {
                 addCard();
               },
             ),
             IconButton(
-              icon: Icon(Icons.unfold_more), //unfold_less will be the opposite
+              icon: const Icon(Icons.unfold_more), //unfold_less will be the opposite
               onPressed: () {
                 showHideSecondRow();
               },
             ),
             IconButton(
-              icon: Icon(Icons.invert_colors_off),
+              icon: const Icon(Icons.invert_colors_off),
               onPressed: () {
-                //_MyAppState().swapTheme(); // Requires stateful root widget, see 'class MyApp extends StatefulWidget'
                 swapTheme();
               },
             ),
           ],
         ),
-        body: Center(child: Container(constraints: BoxConstraints(maxWidth: 900), child: ListView(children: buildCardList(_cardCounter)))),
-        /*floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Center(child: Container(constraints: const BoxConstraints(maxWidth: 900), child: ListView(children: buildCardList(_cardCounter)))),
+        /* // Floating action buttons at the bottom of the screen.
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
