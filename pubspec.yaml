@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.0.2+302
+version: 3.0.4+304
 
 environment:
   sdk: 2.16.2
@@ -34,21 +34,31 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: 1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   analyzer: 1.7.0
-  flutter_launcher_icons: 0.9.2
-  flutter_native_splash: 2.1.5
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: 1.0.0
+  flutter_native_splash: 2.1.5
+  msix: 3.6.1
+  flutter_launcher_icons: 0.9.2
+
+msix_config:
+  display_name: Quick Unit Price Comparison
+  publisher_display_name: Paul Koepke
+  identity_name: 36001PaulKoepke.QuickUnitPriceComparison
+  msix_version: 1.0.0.0
+  publisher: CN=5B55F9C1-E21A-41A5-8FC1-015C098C5630
+  logo_path: C:\Users\paulk\Programming\Flutter\unit_price_comparison\assets\icons\Unit Price Comparison flat icon 2020.11.24 512x512.png
+  store: true
+  #run with: flutter pub run msix:create
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,23 +81,3 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
