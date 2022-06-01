@@ -1,0 +1,10 @@
+^C:\USERS\PAULK\PROGRAMMING\FLUTTER\UNIT_PRICE_COMPARISON\BUILD\WINDOWS\CMAKEFILES\E97D6CF83176962EB17C991F22A503A1\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/paulk/Programming/Flutter/unit_price_comparison/windows -BC:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/unit_price_comparison.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

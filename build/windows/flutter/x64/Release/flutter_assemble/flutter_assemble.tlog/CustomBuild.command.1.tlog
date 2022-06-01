@@ -1,0 +1,28 @@
+^C:\USERS\PAULK\PROGRAMMING\FLUTTER\UNIT_PRICE_COMPARISON\BUILD\WINDOWS\CMAKEFILES\5D44BE83FF4894E7FCA3B1D54C050B54\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\src\flutter PROJECT_DIR=C:\Users\paulk\Programming\Flutter\unit_price_comparison FLUTTER_ROOT=C:\src\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\paulk\Programming\Flutter\unit_price_comparison\windows\flutter\ephemeral PROJECT_DIR=C:\Users\paulk\Programming\Flutter\unit_price_comparison FLUTTER_TARGET=lib\main.dart DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=true PACKAGE_CONFIG=C:\Users\paulk\Programming\Flutter\unit_price_comparison\.dart_tool\package_config.json C:/src/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PAULK\PROGRAMMING\FLUTTER\UNIT_PRICE_COMPARISON\BUILD\WINDOWS\CMAKEFILES\F9D68A52B51BEC4945E2257E89790D4C\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PAULK\PROGRAMMING\FLUTTER\UNIT_PRICE_COMPARISON\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/paulk/Programming/Flutter/unit_price_comparison/windows -BC:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows --check-stamp-file C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

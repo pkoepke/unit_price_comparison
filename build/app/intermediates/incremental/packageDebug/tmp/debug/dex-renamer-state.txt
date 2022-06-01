@@ -1,0 +1,4 @@
+#Fri May 13 09:37:54 CDT 2022
+base.0=C\:\\Users\\paulk\\Programming\\Flutter\\unit_price_comparison\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
