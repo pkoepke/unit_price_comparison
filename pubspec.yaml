@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.0.4+304
+version: 3.0.5+305
 
 environment:
   sdk: 2.16.2
@@ -54,7 +54,7 @@ msix_config:
   display_name: Quick Unit Price Comparison
   publisher_display_name: Paul Koepke
   identity_name: 36001PaulKoepke.QuickUnitPriceComparison
-  msix_version: 1.0.0.0
+  msix_version: 1.0.1.0
   publisher: CN=5B55F9C1-E21A-41A5-8FC1-015C098C5630
   logo_path: C:\Users\paulk\Programming\Flutter\unit_price_comparison\assets\icons\Unit Price Comparison flat icon 2020.11.24 512x512.png
   store: true
