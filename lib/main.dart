@@ -132,8 +132,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _cardCounter =
-      initialCards; // Starting number of cards. Counts up from 1, not 0, so it matches the number shown on the cards.
+  int _cardCounter = initialCards; // Starting number of cards. Counts up from 1, not 0, so it matches the number shown on the cards.
   bool _secondRowOpaque = false;
   bool _showSecondRow = false;
   String _themePref = "dark";
@@ -147,33 +146,18 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> _allUnitNames = [];
 
   // Make controllers for text fields.
-  List<TextEditingController> _priceControllers =
-      List<TextEditingController>.generate(
-          initialCards, (i) => TextEditingController());
-  List<TextEditingController> _unitControllers =
-      List<TextEditingController>.generate(
-          initialCards, (i) => TextEditingController());
-  List<TextEditingController> _qtyControllers =
-      List<TextEditingController>.generate(
-          initialCards, (i) => TextEditingController());
-  List<TextEditingController> _itemNameControllers =
-      List<TextEditingController>.generate(
-          initialCards, (i) => TextEditingController());
-  List<TextEditingController> _unitNameControllers =
-      List<TextEditingController>.generate(
-          initialCards, (i) => TextEditingController());
+  List<TextEditingController> _priceControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  List<TextEditingController> _unitControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  List<TextEditingController> _qtyControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  List<TextEditingController> _itemNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
+  List<TextEditingController> _unitNameControllers = List<TextEditingController>.generate(initialCards, (i) => TextEditingController());
 
   // Make Lists to hold FocusNodes, which handle keyboard focus.
-  final List<FocusNode> _priceFocusNodes =
-      List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  final List<FocusNode> _unitFocusNodes =
-      List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  final List<FocusNode> _qtyFocusNodes =
-      List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  final List<FocusNode> _itemNameFocusNodes =
-      List<FocusNode>.generate(initialCards, (i) => FocusNode());
-  final List<FocusNode> _unitNameFocusNodes =
-      List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  final List<FocusNode> _priceFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  final List<FocusNode> _unitFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  final List<FocusNode> _qtyFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  final List<FocusNode> _itemNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
+  final List<FocusNode> _unitNameFocusNodes = List<FocusNode>.generate(initialCards, (i) => FocusNode());
 
   // Set a default locale and currency. Later the system's preferred locale and currency during initState();
   String currentLocale = "en_US";
@@ -186,13 +170,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // Try to get the platform locales and currency symbol. If this fails keep en_US and $ as defaults. Should't fail but Platform.localeName didn't work on web so who knows.
     try {
       //https://stackoverflow.com/a/62825776/3784441
-      currentLocale = window.locale
-          .toString(); // replaced Platform.localeName with window.locale since the latter works on all platforms including web.
-      currencySymbol =
-          NumberFormat.simpleCurrency(locale: currentLocale).currencySymbol;
+      currentLocale = window.locale.toString(); // replaced Platform.localeName with window.locale since the latter works on all platforms including web.
+      currencySymbol = NumberFormat.simpleCurrency(locale: currentLocale).currencySymbol;
     } catch (e) {
-      currentLocale =
-          "en_US"; // Doesn't do anything except avoid warnings about empty catch blocks.
+      currentLocale = "en_US"; // Doesn't do anything except avoid warnings about empty catch blocks.
     }
 
     // When the widget is created, get the last-used theme from preferences.
@@ -200,23 +181,16 @@ class _MyHomePageState extends State<MyHomePage> {
       _themePref = prefs.getString("theme") ??
           getSystemTheme(); // If null then there's no recorded preference, so it's probably first launch. In that case match the system theme.
       setState(() {
-        _themePref == "dark"
-            ? currentTheme = darkTheme
-            : currentTheme = lightTheme;
+        _themePref == "dark" ? currentTheme = darkTheme : currentTheme = lightTheme;
         saveThemePref(_themePref);
 
         // Set lists of values and controllers to initial lengths so assigning values doesn't throw errors.
         makeValueLists();
-        _priceControllers = List<TextEditingController>.generate(
-            _cardCounter, (i) => TextEditingController());
-        _unitControllers = List<TextEditingController>.generate(
-            _cardCounter, (i) => TextEditingController());
-        _qtyControllers = List<TextEditingController>.generate(
-            _cardCounter, (i) => TextEditingController());
-        _itemNameControllers = List<TextEditingController>.generate(
-            _cardCounter, (i) => TextEditingController());
-        _unitNameControllers = List<TextEditingController>.generate(
-            _cardCounter, (i) => TextEditingController());
+        _priceControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
+        _unitControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
+        _qtyControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
+        _itemNameControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
+        _unitNameControllers = List<TextEditingController>.generate(_cardCounter, (i) => TextEditingController());
       });
     });
   }
@@ -224,19 +198,12 @@ class _MyHomePageState extends State<MyHomePage> {
   // Makes lists to hold values that will be used in calculations. All values are initialized to -1 since null is no longer allowed, and the app doesn't support negative numbers so -1 is effectively null.
   // We could just add and remove items from the list when a card is added or removed, but re-creating the lists means fewer lines of code and the performance impact is trivial.
   void makeValueLists() {
-    _allPrices = List<double>.generate(_cardCounter, (_cardCounter) => -1,
-        growable: true);
-    _allUnits = List<double>.generate(_cardCounter, (_cardCounter) => -1,
-        growable: true);
-    _allQtys = List<double>.generate(_cardCounter, (_cardCounter) => -1,
-        growable: true);
-    _allPricePerUnits = List<double>.generate(
-        _cardCounter, (_cardCounter) => -1,
-        growable: true);
-    _allItemNames = List<String>.generate(_cardCounter, (_cardCounter) => '',
-        growable: true);
-    _allUnitNames = List<String>.generate(_cardCounter, (_cardCounter) => '',
-        growable: true);
+    _allPrices = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true);
+    _allUnits = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true);
+    _allQtys = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true);
+    _allPricePerUnits = List<double>.generate(_cardCounter, (_cardCounter) => -1, growable: true);
+    _allItemNames = List<String>.generate(_cardCounter, (_cardCounter) => '', growable: true);
+    _allUnitNames = List<String>.generate(_cardCounter, (_cardCounter) => '', growable: true);
   }
 
   // Add FocusNodes for new card
@@ -306,8 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Timer(
           const Duration(milliseconds: animationDuration),
           () => setState(() {
-                _showSecondRow =
-                    _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
+                _showSecondRow = _secondRowOpaque; // To avoid race conditions when the button is pushed repeatedly, make sure the values are synced up.
               }));
     } else {
       setState(() {
@@ -397,8 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // TODO test removing this, as constructor improvements probably make it unnecessary.
   // Had problems with errors caused by list items not existing at initial load, so this prevents those "list index doesn't exist" errors.
-  TextEditingController getControllerSafely(
-      List<TextEditingController> controllerList, int cardNum) {
+  TextEditingController getControllerSafely(List<TextEditingController> controllerList, int cardNum) {
     if (controllerList.asMap().containsKey(cardNum)) {
       return controllerList[cardNum];
     } else {
@@ -421,29 +386,29 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       for (int i = 0; i < _cardCounter; i++) {
         // Get values
-        if (_priceControllers[i].text.isNotEmpty) {
+        try {
           _allPrices[i] = double.parse(_priceControllers[i].text);
-        } else {
+        } catch (e) {
           _allPrices[i] = -1;
         }
-        if (_unitControllers[i].text.isNotEmpty) {
+        try {
           _allUnits[i] = double.parse(_unitControllers[i].text);
-        } else {
+        } catch (e) {
           _allUnits[i] = -1;
         }
-        if (_qtyControllers[i].text.isNotEmpty) {
+        try {
           _allQtys[i] = double.parse(_qtyControllers[i].text);
-        } else {
+        } catch (e) {
           _allQtys[i] = 1.0;
         }
-        if (_itemNameControllers[i].text.isNotEmpty) {
+        try {
           _allItemNames[i] = _itemNameControllers[i].text;
-        } else {
+        } catch (e) {
           _allItemNames[i] = '';
         }
-        if (_unitNameControllers[i].text.isNotEmpty) {
+        try {
           _allUnitNames[i] = _unitNameControllers[i].text;
-        } else {
+        } catch (e) {
           _allUnitNames[i] = '';
         }
 
@@ -485,138 +450,106 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow,
-      bool secondRowOpaque) {
+  Widget makeItemCard(BuildContext context, int cardNum, bool showSecondRow, bool secondRowOpaque) {
     int showCardNum = cardNum +
         1; // cardNum is an array index so starts at 0. showCardNum is what we display to the user so it starts at 1 and is always 1 more than cardNum.
     return Card(
       color: currentTheme.backgroundColor,
       child: Container(
-        margin:
-            const EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 5.0),
+        margin: const EdgeInsets.only(left: 2.0, right: 2.0, top: 2.0, bottom: 5.0),
         child: Column(
           children: [
             SizedBox(
               height: 36, // 50 was comfortable but meant fewer items on screen
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        'Item $showCardNum',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ),
-                    Expanded(
-                        flex: 2,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 2.0, right: 2.0),
-                          child: TextSelectionTheme(
-                            data: (currentTheme == darkTheme)
-                                ? darkThemeTextSelection
-                                : lightThemeTextSelection,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  hintText: 'Price ' + currencySymbol,
-                                  contentPadding: const EdgeInsets.only(
-                                    bottom: inputContentPadding,
-                                  )),
-                              style: currentTheme.textTheme.bodyText2,
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                      decimal: true),
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+\.?\d*'))
-                              ],
-                              textInputAction: TextInputAction.next,
-                              controller: getControllerSafely(
-                                  _priceControllers, cardNum),
-                              onChanged: (text) {
-                                doCalculations();
-                              },
-                              focusNode:
-                                  getFocusNodeSafely(_priceFocusNodes, cardNum),
-                              /*onSubmitted: (String str) {
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                Expanded(
+                  child: Text(
+                    'Item $showCardNum',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 2.0, right: 2.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                              hintText: 'Price ' + currencySymbol,
+                              contentPadding: const EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          style: currentTheme.textTheme.bodyText2,
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^(\d*\.?\d*)|^(\.?\d*)'))],
+                          textInputAction: TextInputAction.next,
+                          controller: getControllerSafely(_priceControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
+                          focusNode: getFocusNodeSafely(_priceFocusNodes, cardNum),
+                          /*onSubmitted: (String str) {
                             FocusScope.of(context).requestFocus(_unitFocusNodes[cardNum]);
                           },*/
-                            ),
-                          ),
-                        )),
-                    Expanded(
-                        flex: 2,
-                        child: Container(
-                          padding: const EdgeInsets.only(left: 2.0, right: 2.0),
-                          child: TextSelectionTheme(
-                            data: (currentTheme == darkTheme)
-                                ? darkThemeTextSelection
-                                : lightThemeTextSelection,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: const InputDecoration(
-                                  hintText: 'Units',
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: inputContentPadding,
-                                  )),
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                      decimal: true),
-                              style: currentTheme.textTheme.bodyText2,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+\.?\d*'))
-                              ],
-                              textInputAction: TextInputAction.next,
-                              controller: getControllerSafely(
-                                  _unitControllers, cardNum),
-                              onChanged: (text) {
-                                doCalculations();
-                              },
-                              focusNode: _unitFocusNodes[cardNum],
-                              onSubmitted: (String str) {
-                                // TODO instead of returning to the first field, make the textInputAction done or similar so the keyboard disappears.
-                                if (_showSecondRow) {
-                                  FocusScope.of(context)
-                                      .requestFocus(_qtyFocusNodes[cardNum]);
-                                } else {
-                                  if (cardNum == _cardCounter - 1) {
-                                    FocusScope.of(context)
-                                        .requestFocus(_priceFocusNodes[0]);
-                                  } else {
-                                    FocusScope.of(context).requestFocus(
-                                        _priceFocusNodes[cardNum + 1]);
-                                  }
-                                }
-                              },
-                              //focusNode: allFocusNodes[cardNum * 2 - 1],
-                            ),
-                          ),
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 5.0, bottom: 3.0),
-                        decoration: BoxDecoration(
-                            color: isLowestPrice(cardNum)
-                                ? greenHighlight
-                                : currentTheme.backgroundColor),
-                        child: Text(
-                          showPricePerUnit(cardNum),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            backgroundColor: isLowestPrice(cardNum)
-                                ? greenHighlight
-                                : currentTheme.backgroundColor,
-                            color: isLowestPrice(cardNum)
-                                ? Colors.white
-                                : currentTheme.textTheme.bodyText2?.color,
-                          ),
                         ),
                       ),
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                              hintText: 'Units',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          style: currentTheme.textTheme.bodyText2,
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^(\d*\.?\d*)|^(\.?\d*)'))],
+                          textInputAction: TextInputAction.next,
+                          controller: getControllerSafely(_unitControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
+                          focusNode: _unitFocusNodes[cardNum],
+                          onSubmitted: (String str) {
+                            if (_showSecondRow) {
+                              FocusScope.of(context).requestFocus(_qtyFocusNodes[cardNum]);
+                            } else {
+                              if (cardNum == _cardCounter - 1) {
+                                FocusScope.of(context).requestFocus(_priceFocusNodes[0]);
+                              } else {
+                                FocusScope.of(context).requestFocus(_priceFocusNodes[cardNum + 1]);
+                              }
+                            }
+                          },
+                          //focusNode: allFocusNodes[cardNum * 2 - 1],
+                        ),
+                      ),
+                    )),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 3.0),
+                    decoration: BoxDecoration(color: isLowestPrice(cardNum) ? greenHighlight : currentTheme.backgroundColor),
+                    child: Text(
+                      showPricePerUnit(cardNum),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        backgroundColor: isLowestPrice(cardNum) ? greenHighlight : currentTheme.backgroundColor,
+                        color: isLowestPrice(cardNum) ? Colors.white : currentTheme.textTheme.bodyText2?.color,
+                      ),
                     ),
-                  ]),
+                  ),
+                ),
+              ]),
             ),
             Visibility(
               visible: showSecondRow,
@@ -626,103 +559,83 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: AnimatedOpacity(
                   opacity: secondRowOpaque ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: animationDuration),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.only(left: 3.0, right: 3.0),
-                          child: TextSelectionTheme(
-                            data: (currentTheme == darkTheme)
-                                ? darkThemeTextSelection
-                                : lightThemeTextSelection,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: const InputDecoration(
-                                  hintText: 'Qty',
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: inputContentPadding,
-                                  )),
-                              style: currentTheme.textTheme.bodyText2,
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(),
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d+\.?\d*'))
-                              ],
-                              textInputAction: TextInputAction.next,
-                              controller:
-                                  getControllerSafely(_qtyControllers, cardNum),
-                              onChanged: (text) {
-                                doCalculations();
-                              },
-                              focusNode: _qtyFocusNodes[cardNum],
-                              onSubmitted: (String str) {
-                                FocusScope.of(context)
-                                    .requestFocus(_itemNameFocusNodes[cardNum]);
-                              },
-                            ),
-                          ),
-                        )),
-                        Expanded(
-                            child: Container(
-                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                          child: TextSelectionTheme(
-                            data: (currentTheme == darkTheme)
-                                ? darkThemeTextSelection
-                                : lightThemeTextSelection,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: const InputDecoration(
-                                  hintText: 'Item name',
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: inputContentPadding,
-                                  )),
-                              style: currentTheme.textTheme.bodyText2,
-                              textInputAction: TextInputAction.next,
-                              controller: getControllerSafely(
-                                  _itemNameControllers, cardNum),
-                              focusNode: _itemNameFocusNodes[cardNum],
-                              onSubmitted: (String str) {
-                                FocusScope.of(context)
-                                    .requestFocus(_unitNameFocusNodes[cardNum]);
-                              },
-                            ),
-                          ),
-                        )),
-                        Expanded(
-                            child: Container(
-                          margin: const EdgeInsets.only(left: 3.0, right: 3.0),
-                          child: TextSelectionTheme(
-                            data: (currentTheme == darkTheme)
-                                ? darkThemeTextSelection
-                                : lightThemeTextSelection,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: const InputDecoration(
-                                  hintText: 'Unit name',
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: inputContentPadding,
-                                  )),
-                              style: currentTheme.textTheme.bodyText2,
-                              textInputAction: TextInputAction.next,
-                              controller: getControllerSafely(
-                                  _unitNameControllers, cardNum),
-                              focusNode: _unitNameFocusNodes[cardNum],
-                              onSubmitted: (String str) {
-                                // TODO instead of returning to the top, make textInputAction Done or similar so the keyboard just disappears.
-                                if (cardNum == _cardCounter - 1) {
-                                  FocusScope.of(context)
-                                      .requestFocus(_priceFocusNodes[0]);
-                                } else {
-                                  FocusScope.of(context).requestFocus(
-                                      _priceFocusNodes[cardNum + 1]);
-                                }
-                              },
-                            ),
-                          ),
-                        )),
-                      ]),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                              hintText: 'Qty',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          style: currentTheme.textTheme.bodyText2,
+                          keyboardType: const TextInputType.numberWithOptions(),
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^(\d*\.?\d*)|^(\.?\d*)'))],
+                          textInputAction: TextInputAction.next,
+                          controller: getControllerSafely(_qtyControllers, cardNum),
+                          onChanged: (text) {
+                            doCalculations();
+                          },
+                          focusNode: _qtyFocusNodes[cardNum],
+                          onSubmitted: (String str) {
+                            FocusScope.of(context).requestFocus(_itemNameFocusNodes[cardNum]);
+                          },
+                        ),
+                      ),
+                    )),
+                    Expanded(
+                        child: Container(
+                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                              hintText: 'Item name',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          style: currentTheme.textTheme.bodyText2,
+                          textInputAction: TextInputAction.next,
+                          controller: getControllerSafely(_itemNameControllers, cardNum),
+                          focusNode: _itemNameFocusNodes[cardNum],
+                          onSubmitted: (String str) {
+                            FocusScope.of(context).requestFocus(_unitNameFocusNodes[cardNum]);
+                          },
+                        ),
+                      ),
+                    )),
+                    Expanded(
+                        child: Container(
+                      margin: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: TextSelectionTheme(
+                        data: (currentTheme == darkTheme) ? darkThemeTextSelection : lightThemeTextSelection,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                              hintText: 'Unit name',
+                              contentPadding: EdgeInsets.only(
+                                bottom: inputContentPadding,
+                              )),
+                          style: currentTheme.textTheme.bodyText2,
+                          textInputAction: TextInputAction.next,
+                          controller: getControllerSafely(_unitNameControllers, cardNum),
+                          focusNode: _unitNameFocusNodes[cardNum],
+                          onSubmitted: (String str) {
+                            if (cardNum == _cardCounter - 1) {
+                              FocusScope.of(context).requestFocus(_priceFocusNodes[0]);
+                            } else {
+                              FocusScope.of(context).requestFocus(_priceFocusNodes[cardNum + 1]);
+                            }
+                          },
+                        ),
+                      ),
+                    )),
+                  ]),
                 ),
               ),
             ),
@@ -760,8 +673,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             IconButton(
-              icon: const Icon(
-                  Icons.unfold_more), //unfold_less will be the opposite
+              icon: const Icon(Icons.unfold_more), //unfold_less will be the opposite
               onPressed: () {
                 showHideSecondRow();
               },
@@ -774,10 +686,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: Center(
-            child: Container(
-                constraints: const BoxConstraints(maxWidth: 900),
-                child: ListView(children: buildCardList(_cardCounter)))),
+        body: Center(child: Container(constraints: const BoxConstraints(maxWidth: 900), child: ListView(children: buildCardList(_cardCounter)))),
         /* // Floating action buttons at the bottom of the screen.
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
