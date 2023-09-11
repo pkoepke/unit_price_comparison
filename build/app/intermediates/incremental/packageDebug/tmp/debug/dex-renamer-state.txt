@@ -1,4 +1,4 @@
-#Wed Nov 30 16:21:49 CST 2022
+#Mon Sep 11 09:15:59 CDT 2023
 base.0=C\:\\Users\\paulk\\Programming\\Flutter\\unit_price_comparison\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
 path.0=classes.dex
+renamed.0=classes.dex
