@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         applicationId "com.paulkoepke.unitpricecomparison"
-        minSdkVersion 16
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

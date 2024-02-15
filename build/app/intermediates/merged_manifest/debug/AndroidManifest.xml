@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.paulkoepke.unitpricecomparison"
-    android:versionCode="306"
-    android:versionName="3.0.6" >
+    android:versionCode="309"
+    android:versionName="3.0.9" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="19"
         android:targetSdkVersion="33" />
     <!--
          Flutter needs it to communicate with the running application

@@ -85,11 +85,9 @@ Referenced Strings:
   Active
   ActivityFilter
   ActivityRule
+  AnnotateVersionCheck
   AppBundleLocaleChanges
-  AppLifecycleState.detached
-  AppLifecycleState.inactive
-  AppLifecycleState.paused
-  AppLifecycleState.resumed
+  AppLifecycleState.
   Array
   BITMAP
   BITMAP_MASKABLE
@@ -112,6 +110,7 @@ Referenced Strings:
   COMPLETING_RETRY
   COMPLETING_WAITING_CHILDREN
   CONDITION_FALSE
+  CONSUMED
   COPY
   COROUTINE_SUSPENDED
   CPU_ACQUIRED
@@ -137,6 +136,7 @@ Referenced Strings:
   DECREASE
   DEFAULT
   DESTROYED
+  DETACHED
   DID_GAIN_ACCESSIBILITY_FOCUS
   DID_LOSE_ACCESSIBILITY_FOCUS
   DISABLE_ANIMATIONS
@@ -153,6 +153,7 @@ Referenced Strings:
   DeviceOrientation.landscapeRight
   DeviceOrientation.portraitDown
   DeviceOrientation.portraitUp
+  DiscouragedApi
   Dispatchers.Default
   Dispatchers.IO
   Dispatchers.Main
@@ -181,7 +182,6 @@ Referenced Strings:
   FlutterLoader
   FlutterRenderer
   FlutterSharedPreferences
-  FlutterSplashView
   FlutterSurfaceView
   FlutterTextureView
   FlutterView
@@ -190,12 +190,15 @@ Referenced Strings:
   HALF_OPENED
   HAS_CHECKED_STATE
   HAS_ENABLED_STATE
+  HAS_EXPANDED_STATE
   HAS_IMPLICIT_SCROLLING
   HAS_TOGGLED_STATE
   HEAVY_IMPACT
+  HIDDEN
   HIGH_CONTRAST
   HINGE
   HORIZONTAL
+  HYBRID_ONLY
   HapticFeedback.vibrate
   HapticFeedbackType.heavyImpact
   HapticFeedbackType.lightImpact
@@ -203,13 +206,16 @@ Referenced Strings:
   HapticFeedbackType.selectionClick
   IMMERSIVE
   IMMERSIVE_STICKY
+  INACTIVE
   INCREASE
   INITIALIZED
   INTERNAL
   INVERT_COLORS
   IS_BUTTON
   IS_CHECKED
+  IS_CHECK_STATE_MIXED
   IS_ENABLED
+  IS_EXPANDED
   IS_FOCUSABLE
   IS_FOCUSED
   IS_HEADER
@@ -227,6 +233,8 @@ Referenced Strings:
   IS_TEXT_FIELD
   IS_TOGGLED
   IconCompat
+  ImageReaderPlatformViewRenderTarget
+  ImageTextureRegistryEntry
   InlinedApi
   InputConnectionAdaptor
   KeyEventChannel
@@ -280,6 +288,7 @@ Referenced Strings:
   Override
   PARKING
   PASTE
+  PAUSED
   PHONE
   PHYSICAL_DISPLAY_PLATFORM_VIEW
   PLAIN_TEXT
@@ -297,6 +306,8 @@ Referenced Strings:
   PlatformViewWrapper
   PlatformViewsChannel
   PlatformViewsController
+  PrivateApi
+  PrivateConstructorForUtilityClass
   REDUCE_MOTION
   REMOVED_TASK
   REMOVE_FROZEN
@@ -327,6 +338,7 @@ Referenced Strings:
   SUSPEND
   SendQueued
   SettingsChannel
+  SharedPreferencesPlugin
   SidecarCompat
   SpellCheck.initiateSpellCheck
   SpellCheckChannel
@@ -334,7 +346,7 @@ Referenced Strings:
   SplitPairRule
   SplitPlaceholderRule
   SplitRuleResolution
-  StorageError
+  SurfaceTexturePlatformViewRenderTarget
   SwitchIntDef
   SyntheticAccessor
   SystemChannel
@@ -347,6 +359,7 @@ Referenced Strings:
   SystemChrome.setSystemUIOverlayStyle
   SystemChrome.systemUIChange
   SystemNavigator.pop
+  SystemNavigator.setFrameworkHandlesBack
   SystemSound.play
   SystemSoundType.alert
   SystemSoundType.click
@@ -359,6 +372,8 @@ Referenced Strings:
   TAP
   TERMINATED
   TEXT
+  TEXTURE_WITH_HYBRID_FALLBACK
+  TEXTURE_WITH_VIRTUAL_FALLBACK
   TOO_LATE_TO_CANCEL
   TOP_OVERLAYS
   TRANSFORM
@@ -377,6 +392,7 @@ Referenced Strings:
   TextInput.setEditingState
   TextInput.setPlatformViewClient
   TextInput.show
+  TextInputAction.commitContent
   TextInputAction.done
   TextInputAction.go
   TextInputAction.newline
@@ -387,6 +403,7 @@ Referenced Strings:
   TextInputAction.send
   TextInputAction.unspecified
   TextInputChannel
+  TextInputClient.onConnectionClosed
   TextInputClient.performAction
   TextInputClient.performPrivateCommand
   TextInputClient.requestExistingInputS...
@@ -405,6 +422,7 @@ Referenced Strings:
   TextInputType.text
   TextInputType.url
   TextInputType.visiblePassword
+  Trace
   UNDECIDED
   UNDEFINED
   UNDISPATCHED
@@ -420,9 +438,11 @@ Referenced Strings:
   VGhpcyBpcyB0aGUgcHJlZml4IGZvciBhIGxpc3Qu
   VIRTUAL_DISPLAY_PLATFORM_VIEW
   VISIBLE_PASSWORD
+  ViewCompat
   WORDS
   WindowInfoTrackerCallbackAdapter.kt
   WindowInfoTrackerImpl.kt
+  WindowInsetsCompat
   WindowServer
   WrongConstant
   _bounds
@@ -466,10 +486,13 @@ Referenced Strings:
   android
   android.intent.action.RUN
   android.os.Build
+  android.support.v13.view.inputmethod....
   android.type.verbatim
   android.util.LongArray
   android.view.DisplayInfo
   android.view.View
+  android.view.View$AttachInfo
+  android.view.ViewRootImpl
   android.widget.Button
   android.widget.CheckBox
   android.widget.EditText
@@ -479,11 +502,14 @@ Referenced Strings:
   android.widget.ScrollView
   android.widget.SeekBar
   android.widget.Switch
+  androidx.core.view.inputmethod.Editor...
   androidx.window.java.layout.WindowInf...
   androidx.window.layout.WindowInfoTrac...
   announce
   app_flutter
   args
+  asyncTraceBegin
+  asyncTraceEnd
   auto
   autocorrect
   autofill
@@ -507,6 +533,7 @@ Referenced Strings:
   buffer
   byte
   cache
+  cached_engine_group_id
   cached_engine_id
   callback
   callbackInterface
@@ -516,7 +543,6 @@ Referenced Strings:
   char
   character
   chars
-  clear
   clearFocus
   cleartextTrafficPermitted
   click
@@ -525,7 +551,6 @@ Referenced Strings:
   collect
   collection
   com.google.android.inputmethod.latin
-  commit
   commonPool
   comparator
   completion
@@ -536,8 +561,10 @@ Referenced Strings:
   componentType
   composingBase
   composingExtent
+  configurationId
   consumer
   consumerIndex
+  contentCommitMimeTypes
   context
   contextMenu
   continuation
@@ -555,6 +582,7 @@ Referenced Strings:
   creditCardSecurityCode
   currentDisplay
   dark
+  dart_entrypoint
   dart_entrypoint_args
   data
   decimal
@@ -569,6 +597,14 @@ Referenced Strings:
   description
   destination
   destroy_engine_with_activity
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
+  dev.flutter.pigeon.SharedPreferencesA...
   deviceId
   deviceState
   dimen
@@ -593,6 +629,7 @@ Referenced Strings:
   enableSuggestions
   enable_state_restoration
   enabled
+  endIndex
   error
   exception
   executor
@@ -613,10 +650,10 @@ Referenced Strings:
   flags
   float
   flutter
-  flutter.
   flutter/accessibility
   flutter/deferredcomponent
   flutter/isolate
+  flutter/keyboard
   flutter/keydata
   flutter/keyevent
   flutter/lifecycle
@@ -633,13 +670,13 @@ Referenced Strings:
   flutter_assets
   flutter_deeplinking_enabled
   flutter_native_splash
+  focus
   forbidden
   frame
   framework
   fullStreetAddress
   gender
   get
-  getAll
   getAppBounds
   getBounds
   getChildId
@@ -647,6 +684,7 @@ Referenced Strings:
   getDescriptor
   getDisplayFeatures
   getDisplayInfo
+  getKeyboardState
   getModule
   getNextMatch
   getParentNodeId
@@ -658,6 +696,7 @@ Referenced Strings:
   getSourceNodeId
   getSuppressed
   getUncaughtExceptionPreHandler
+  getViewRootImpl
   getWindowLayoutInfo
   givenName
   grab
@@ -668,7 +707,7 @@ Referenced Strings:
   hintText
   hints
   hybrid
-  i0.a
+  hybridFallback
   id
   image
   inFlightTasks
@@ -688,13 +727,14 @@ Referenced Strings:
   io.flutter.EntrypointUri
   io.flutter.InitialRoute
   io.flutter.embedding.android.EnableIm...
-  io.flutter.embedding.android.EnableSk...
+  io.flutter.embedding.android.EnableVu...
+  io.flutter.embedding.android.Impeller...
   io.flutter.embedding.android.LeakVM
   io.flutter.embedding.android.NormalTheme
   io.flutter.embedding.android.OldGenHe...
-  io.flutter.embedding.android.SplashSc...
   it
   it.parameterTypes
+  j0.a
   jClass
   jar
   jar:file:
@@ -805,12 +845,17 @@ Referenced Strings:
   listener
   loadingUnitId
   locale
+  location
   long
   longPress
+  mAttachInfo
   mChildNodeIds
+  mContentInsets
   mH
   mNextServedView
   mServedView
+  mStableInsets
+  mVisibleInsets
   main
   memoryPressure
   message
@@ -818,6 +863,7 @@ Referenced Strings:
   method
   middleInitial
   middleName
+  mimeType
   missingDelimiterValue
   moduleName
   move
@@ -858,6 +904,7 @@ Referenced Strings:
   onStop
   onTrimMemory
   onUserLeaveHint
+  onWindowFocusChanged
   onWindowLayoutChangeListenerAdded
   onWindowLayoutChangeListenerRemoved
   oneTimeCode
@@ -890,7 +937,6 @@ Referenced Strings:
   platformBrightness
   platformViewId
   plugins
-  plugins.flutter.io/shared_preferences...
   point
   popRoute
   postalAddress
@@ -910,13 +956,12 @@ Referenced Strings:
   primitiveFqNames.values
   producerIndex
   push
-  pushRoute
+  pushRouteInformation
   put
   range
   read
   rect
   registerWith
-  remove
   removeView
   removeViewImmediate
   repeatCount
@@ -954,18 +999,13 @@ Referenced Strings:
   selectionExtent
   separator
   sequence
-  setBool
   setDirection
   setDisplayFeatures
-  setDouble
   setInitialRoute
-  setInt
   setLocale
   setPosture
   setRemoveOnCancelPolicy
   setSidecarCallback
-  setString
-  setStringList
   short
   show_password
   sidecarAdapter
@@ -982,12 +1022,14 @@ Referenced Strings:
   splitPairFilters
   splitRule
   splitRules
+  startIndex
   state
   statusBarColor
   statusBarIconBrightness
   streetAddress
   string
   suffix
+  suggestions
   surface
   synchronizeToNativeViewHierarchy
   systemNavigationBarColor
@@ -1023,6 +1065,7 @@ Referenced Strings:
   uninstallDeferredComponent
   uniqueIdentifier
   updateViewLayout
+  uri
   username
   usesVirtualDisplay
   value
@@ -1143,7 +1186,6 @@ Marking attr:android_offset:-1 used because its prefix matches string pool const
 Marking attr:android_colorBackground:-1 used because its prefix matches string pool constant android
 Marking attr:shortcutMatchRequired:2130771992 used because its prefix matches string pool constant short
 Marking styleable:SplitPairFilter:-1 used because its prefix matches string pool constant SplitPairFilter
-Marking attr:clearTop:2130771972 used because its prefix matches string pool constant clear
 Marking attr:secondaryActivityName:2130771991 used because its prefix matches string pool constant secondaryActivityName
 Marking id:info:2131034158 used because its prefix matches string pool constant info
 Marking attr:primaryActivityName:2130771988 used because its prefix matches string pool constant primaryActivity
@@ -1187,7 +1229,6 @@ style:Widget_Compat_NotificationActionText:2131361800 => [color:androidx_core_se
 The root reachable resources are:
 attr:activityAction:2130771968,
    attr:activityName:2130771969,
-   attr:clearTop:2130771972,
    attr:primaryActivityName:2130771988,
    attr:secondaryActivityAction:2130771990,
    attr:secondaryActivityName:2130771991,
@@ -1237,6 +1278,7 @@ attr:activityAction:2130771968,
    id:line1:2131034160,
    id:line3:2131034161,
    id:locale:2131034162,
+   id:tag_accessibility_pane_title:2131034174,
    id:text:2131034184,
    id:text2:2131034185,
    mipmap:ic_launcher:2131230720,
@@ -1289,12 +1331,9 @@ Skipped unused resource res/drawable-xhdpi-v4/notification_bg_normal.9.png: 221 
 Skipped unused resource res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png: 247 bytes (replaced with small dummy file of size 77 bytes)
 Skipped unused resource res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png: 138 bytes (replaced with small dummy file of size 67 bytes)
 Skipped unused resource res/layout/custom_dialog.xml: 828 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout/notification_action.xml: 2296 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout-v17/notification_action.xml: 2458 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout/notification_action_tombstone.xml: 2757 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout-v17/notification_action_tombstone.xml: 2919 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout-v16/notification_template_custom_big.xml: 8323 bytes (replaced with small dummy file of size 9 bytes)
-Skipped unused resource res/layout-v17/notification_template_custom_big.xml: 9240 bytes (replaced with small dummy file of size 9 bytes)
+Skipped unused resource res/layout/notification_action.xml: 2458 bytes (replaced with small dummy file of size 9 bytes)
+Skipped unused resource res/layout/notification_action_tombstone.xml: 2919 bytes (replaced with small dummy file of size 9 bytes)
+Skipped unused resource res/layout-v16/notification_template_custom_big.xml: 9240 bytes (replaced with small dummy file of size 9 bytes)
 Skipped unused resource res/layout/notification_template_icon_group.xml: 577 bytes (replaced with small dummy file of size 9 bytes)
 Skipped unused resource res/layout/notification_template_part_chronometer.xml: 643 bytes (replaced with small dummy file of size 9 bytes)
 Skipped unused resource res/layout/notification_template_part_time.xml: 630 bytes (replaced with small dummy file of size 9 bytes)
