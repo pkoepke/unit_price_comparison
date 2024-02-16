@@ -1,0 +1,11 @@
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/icudtl.dat
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/flutter_windows.dll
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin.json
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Users/paulk/Programming/Flutter/unit_price_comparison/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

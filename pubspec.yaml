@@ -62,10 +62,11 @@ msix_config:
 # The following section is specific to Flutter.
 flutter:
   fonts:
-    - family: "NotoSans"
+    - family: NotoSans
       fonts:
-      - asset: "fonts/NotoSans-VariableFont_wdth,wght.ttf"
-      - asset: "fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf"
+      - asset: fonts/NotoSans-VariableFont_wdth,wght.ttf
+      - asset: fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf
+        style: italic
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
