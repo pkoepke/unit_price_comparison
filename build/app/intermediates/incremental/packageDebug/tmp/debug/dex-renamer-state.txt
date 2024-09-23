@@ -1,4 +1,16 @@
-#Thu Feb 15 14:03:30 CST 2024
-base.0=C\:\\Users\\paulk\\Programming\\Flutter\\unit_price_comparison\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Mon Sep 23 14:59:19 CDT 2024
+base.0=/Users/paulk/Programming/unit_price_comparison/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/paulk/Programming/unit_price_comparison/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.2=/Users/paulk/Programming/unit_price_comparison/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.3=/Users/paulk/Programming/unit_price_comparison/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.4=/Users/paulk/Programming/unit_price_comparison/build/app/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex
 path.0=classes.dex
+path.1=0/classes.dex
+path.2=0/classes.dex
+path.3=1/classes.dex
+path.4=4/classes.dex
 renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
+renamed.4=classes5.dex

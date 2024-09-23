@@ -52,7 +52,7 @@ msix_config:
   identity_name: 36001PaulKoepke.QuickUnitPriceComparison
   msix_version: ^1.0.1.0
   publisher: CN=5B55F9C1-E21A-41A5-8FC1-015C098C5630
-  logo_path: C:\Users\paulk\Programming\Flutter\unit_price_comparison\assets\icons\Unit Price Comparison flat icon 2020.11.24 512x512.png
+  logo_path: assets/icons/Unit Price Comparison flat icon 2020.11.24 512x512.pngÏÏ
   store: true
   #run with: flutter pub run msix:create
 

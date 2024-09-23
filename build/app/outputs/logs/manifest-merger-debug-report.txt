@@ -1,155 +1,273 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-MERGED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-MERGED from [:shared_preferences_android] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:flutter_native_splash] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\flutter_native_splash\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9e0f4c23cac83929cc67224ecfe63b10\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\3555a01bf926d3f672dfaf35edc258dd\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\f11521febe193906d4005060907e82d1\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\a62a434517c248d86494c7f82c362796\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\5438ea35a55011d8f1fa5f6e5625eb38\transformed\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\4e06f08126084f9404ae84d8f5637ec4\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\paulk\.gradle\caches\transforms-3\bc86e887929c8a57d111db6a0ea4cd57\transformed\lifecycle-runtime-2.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\fe7237bd42a96cdbc1ec8ec8791dea96\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\7f9a039c5923e742fac8270792955143\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\e695e856ee7f8306b5e47ded099632f3\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\8f10eb7ce307ffe941b3ae9f250db165\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\126d4831fab1b4ac48255872e37b5744\transformed\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\paulk\.gradle\caches\transforms-3\3853f89561a7e6b4c30b175fbdd7def0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\paulk\.gradle\caches\transforms-3\e4440d3b6c9199554d312645212b34b6\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9b0005089825035fea5cb66d32f7b374\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml:1:1-7:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml:1:1-7:12
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+MERGED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+MERGED from [:flutter_native_splash] /Users/paulk/Programming/unit_price_comparison/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences_android] /Users/paulk/Programming/unit_price_comparison/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.fragment:fragment:1.7.1] /Users/paulk/.gradle/caches/transforms-3/165a0825b44ed3157588238416961336/transformed/fragment-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.window:window-java:1.2.0] /Users/paulk/.gradle/caches/transforms-3/43870a2c087595bc2891d147001931e9/transformed/jetified-window-java-1.2.0/AndroidManifest.xml:17:1-21:12
+MERGED from [androidx.activity:activity:1.8.1] /Users/paulk/.gradle/caches/transforms-3/945632470fff90193a71fc031c00d401/transformed/jetified-activity-1.8.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/paulk/.gradle/caches/transforms-3/884444b7c30d32652cca0d6dc048a36b/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/paulk/.gradle/caches/transforms-3/643ad3c95776b50ee49619c0f0300554/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /Users/paulk/.gradle/caches/transforms-3/57a0cabbc8e2473de93508b27938cc42/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /Users/paulk/.gradle/caches/transforms-3/6a9e807f93551362b9cb1b2952e02ff7/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /Users/paulk/.gradle/caches/transforms-3/7194f9a3f7ec98a79dca8d232c770503/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /Users/paulk/.gradle/caches/transforms-3/a51f2e98328e7c806bd7d321edba3f11/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /Users/paulk/.gradle/caches/transforms-3/52016da808fd756ae64588cdfccd073b/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/paulk/.gradle/caches/transforms-3/7688bfb04de66761b5149a0a55aec679/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5bf14df0e65833f40c6b2e1b432a39ac/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /Users/paulk/.gradle/caches/transforms-3/5f3a49f025026bae82eca046bf065a02/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/paulk/.gradle/caches/transforms-3/8b1e06cbd1ff79430591331d5c59c6e1/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/paulk/.gradle/caches/transforms-3/dfedd421b9c0a0dca64a0acaae308afb/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5e0d42bea52af53b6100cfa9065a5d6a/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/paulk/.gradle/caches/transforms-3/d29035aec9a3ee7098c489e0406178d0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/paulk/.gradle/caches/transforms-3/98108fc3902e909e24b11b1b9c1ab619/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paulk/.gradle/caches/transforms-3/62014efa6f5f9e8bea676ddac9d0d859/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/paulk/.gradle/caches/transforms-3/cb32a42c5ad95bee916163dadd1360ec/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/paulk/.gradle/caches/transforms-3/40c95cacc510de8749aa146d914728be/transformed/jetified-core-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/paulk/.gradle/caches/transforms-3/240ba1befc9b8a139e140be11ebb9766/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 	package
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:2:5-49
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:2:5-49
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:1-36:12
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:1-36:12
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:1:11-69
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:1:11-69
 application
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:9:5-35:19
-MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
-MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
-MERGED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\paulk\.gradle\caches\transforms-3\3853f89561a7e6b4c30b175fbdd7def0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\paulk\.gradle\caches\transforms-3\3853f89561a7e6b4c30b175fbdd7def0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:9:5-35:19
+MERGED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paulk/.gradle/caches/transforms-3/62014efa6f5f9e8bea676ddac9d0d859/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paulk/.gradle/caches/transforms-3/62014efa6f5f9e8bea676ddac9d0d859/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:10:9-46
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:10:9-46
 	android:icon
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:11:9-43
 meta-data#flutterEmbedding
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:13:9-15:33
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:13:9-15:33
 	android:value
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:15:13-30
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:15:13-30
 	android:name
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:14:13-44
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:14:13-44
 activity#com.paulkoepke.unitpricecomparison.MainActivity
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:16:9-34:20
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:16:9-34:20
 	android:launchMode
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:18:13-43
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:18:13-43
 	android:hardwareAccelerated
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:21:13-47
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:21:13-47
 	android:windowSoftInputMode
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:22:13-55
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:22:13-55
 	android:exported
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:23:13-36
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:23:13-36
 	android:configChanges
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:20:13-144
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:20:13-144
 	android:theme
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:19:13-47
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:19:13-47
 	android:name
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:17:13-41
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:17:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:30:13-33:29
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:30:13-33:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:31:17-68
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:31:17-68
 	android:name
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:31:25-66
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:32:17-76
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:32:17-76
 	android:name
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml:32:27-74
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml:32:27-74
 uses-sdk
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-MERGED from [:shared_preferences_android] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:shared_preferences_android] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_native_splash] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\flutter_native_splash\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_native_splash] C:\Users\paulk\Programming\Flutter\unit_price_comparison\build\flutter_native_splash\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9e0f4c23cac83929cc67224ecfe63b10\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9e0f4c23cac83929cc67224ecfe63b10\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\3555a01bf926d3f672dfaf35edc258dd\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
-MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\3555a01bf926d3f672dfaf35edc258dd\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\f11521febe193906d4005060907e82d1\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\f11521febe193906d4005060907e82d1\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\a62a434517c248d86494c7f82c362796\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\a62a434517c248d86494c7f82c362796\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\5438ea35a55011d8f1fa5f6e5625eb38\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\5438ea35a55011d8f1fa5f6e5625eb38\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\4e06f08126084f9404ae84d8f5637ec4\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\4e06f08126084f9404ae84d8f5637ec4\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.6.0] C:\Users\paulk\.gradle\caches\transforms-3\ce2070a4b366ed5388e6b418c9c27eb9\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\paulk\.gradle\caches\transforms-3\bc86e887929c8a57d111db6a0ea4cd57\transformed\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\paulk\.gradle\caches\transforms-3\bc86e887929c8a57d111db6a0ea4cd57\transformed\lifecycle-runtime-2.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\fe7237bd42a96cdbc1ec8ec8791dea96\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\fe7237bd42a96cdbc1ec8ec8791dea96\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\7f9a039c5923e742fac8270792955143\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\7f9a039c5923e742fac8270792955143\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\e695e856ee7f8306b5e47ded099632f3\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\e695e856ee7f8306b5e47ded099632f3\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\8f10eb7ce307ffe941b3ae9f250db165\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\paulk\.gradle\caches\transforms-3\8f10eb7ce307ffe941b3ae9f250db165\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\126d4831fab1b4ac48255872e37b5744\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\paulk\.gradle\caches\transforms-3\126d4831fab1b4ac48255872e37b5744\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\paulk\.gradle\caches\transforms-3\3853f89561a7e6b4c30b175fbdd7def0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\paulk\.gradle\caches\transforms-3\3853f89561a7e6b4c30b175fbdd7def0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\paulk\.gradle\caches\transforms-3\e4440d3b6c9199554d312645212b34b6\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\paulk\.gradle\caches\transforms-3\e4440d3b6c9199554d312645212b34b6\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9b0005089825035fea5cb66d32f7b374\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\paulk\.gradle\caches\transforms-3\9b0005089825035fea5cb66d32f7b374\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
-INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+MERGED from [:flutter_native_splash] /Users/paulk/Programming/unit_price_comparison/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_native_splash] /Users/paulk/Programming/unit_price_comparison/build/flutter_native_splash/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/paulk/Programming/unit_price_comparison/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/paulk/Programming/unit_price_comparison/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment:1.7.1] /Users/paulk/.gradle/caches/transforms-3/165a0825b44ed3157588238416961336/transformed/fragment-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment:1.7.1] /Users/paulk/.gradle/caches/transforms-3/165a0825b44ed3157588238416961336/transformed/fragment-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.window:window-java:1.2.0] /Users/paulk/.gradle/caches/transforms-3/43870a2c087595bc2891d147001931e9/transformed/jetified-window-java-1.2.0/AndroidManifest.xml:19:5-44
+MERGED from [androidx.window:window-java:1.2.0] /Users/paulk/.gradle/caches/transforms-3/43870a2c087595bc2891d147001931e9/transformed/jetified-window-java-1.2.0/AndroidManifest.xml:19:5-44
+MERGED from [androidx.activity:activity:1.8.1] /Users/paulk/.gradle/caches/transforms-3/945632470fff90193a71fc031c00d401/transformed/jetified-activity-1.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.1] /Users/paulk/.gradle/caches/transforms-3/945632470fff90193a71fc031c00d401/transformed/jetified-activity-1.8.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/paulk/.gradle/caches/transforms-3/884444b7c30d32652cca0d6dc048a36b/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/paulk/.gradle/caches/transforms-3/884444b7c30d32652cca0d6dc048a36b/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/paulk/.gradle/caches/transforms-3/643ad3c95776b50ee49619c0f0300554/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/paulk/.gradle/caches/transforms-3/643ad3c95776b50ee49619c0f0300554/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /Users/paulk/.gradle/caches/transforms-3/57a0cabbc8e2473de93508b27938cc42/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /Users/paulk/.gradle/caches/transforms-3/57a0cabbc8e2473de93508b27938cc42/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /Users/paulk/.gradle/caches/transforms-3/6a9e807f93551362b9cb1b2952e02ff7/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /Users/paulk/.gradle/caches/transforms-3/6a9e807f93551362b9cb1b2952e02ff7/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /Users/paulk/.gradle/caches/transforms-3/7194f9a3f7ec98a79dca8d232c770503/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /Users/paulk/.gradle/caches/transforms-3/7194f9a3f7ec98a79dca8d232c770503/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /Users/paulk/.gradle/caches/transforms-3/a51f2e98328e7c806bd7d321edba3f11/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /Users/paulk/.gradle/caches/transforms-3/a51f2e98328e7c806bd7d321edba3f11/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /Users/paulk/.gradle/caches/transforms-3/52016da808fd756ae64588cdfccd073b/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /Users/paulk/.gradle/caches/transforms-3/52016da808fd756ae64588cdfccd073b/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/paulk/.gradle/caches/transforms-3/7688bfb04de66761b5149a0a55aec679/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/paulk/.gradle/caches/transforms-3/7688bfb04de66761b5149a0a55aec679/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5bf14df0e65833f40c6b2e1b432a39ac/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5bf14df0e65833f40c6b2e1b432a39ac/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /Users/paulk/.gradle/caches/transforms-3/5f3a49f025026bae82eca046bf065a02/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /Users/paulk/.gradle/caches/transforms-3/5f3a49f025026bae82eca046bf065a02/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/paulk/.gradle/caches/transforms-3/8b1e06cbd1ff79430591331d5c59c6e1/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/paulk/.gradle/caches/transforms-3/8b1e06cbd1ff79430591331d5c59c6e1/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/paulk/.gradle/caches/transforms-3/dfedd421b9c0a0dca64a0acaae308afb/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/paulk/.gradle/caches/transforms-3/dfedd421b9c0a0dca64a0acaae308afb/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5e0d42bea52af53b6100cfa9065a5d6a/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/paulk/.gradle/caches/transforms-3/5e0d42bea52af53b6100cfa9065a5d6a/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/paulk/.gradle/caches/transforms-3/d29035aec9a3ee7098c489e0406178d0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/paulk/.gradle/caches/transforms-3/d29035aec9a3ee7098c489e0406178d0/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/paulk/.gradle/caches/transforms-3/98108fc3902e909e24b11b1b9c1ab619/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/paulk/.gradle/caches/transforms-3/98108fc3902e909e24b11b1b9c1ab619/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paulk/.gradle/caches/transforms-3/62014efa6f5f9e8bea676ddac9d0d859/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paulk/.gradle/caches/transforms-3/62014efa6f5f9e8bea676ddac9d0d859/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/paulk/.gradle/caches/transforms-3/cb32a42c5ad95bee916163dadd1360ec/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/paulk/.gradle/caches/transforms-3/cb32a42c5ad95bee916163dadd1360ec/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/paulk/.gradle/caches/transforms-3/40c95cacc510de8749aa146d914728be/transformed/jetified-core-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/paulk/.gradle/caches/transforms-3/40c95cacc510de8749aa146d914728be/transformed/jetified-core-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/paulk/.gradle/caches/transforms-3/240ba1befc9b8a139e140be11ebb9766/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/paulk/.gradle/caches/transforms-3/240ba1befc9b8a139e140be11ebb9766/transformed/jetified-annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml:6:5-66
+ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml:6:5-66
 	android:name
-		ADDED from C:\Users\paulk\Programming\Flutter\unit_price_comparison\android\app\src\debug\AndroidManifest.xml:6:22-64
+		ADDED from /Users/paulk/Programming/unit_price_comparison/android/app/src/debug/AndroidManifest.xml:6:22-64
 uses-library#androidx.window.extensions
-ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
 	android:required
-		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+		ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
 	android:name
-		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+		ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
 uses-library#androidx.window.sidecar
-ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
 	android:required
-		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+		ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
 	android:name
-		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\paulk\.gradle\caches\transforms-3\879e3e1d5843dcd89de92e35adc3d9c5\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+		ADDED from [androidx.window:window:1.2.0] /Users/paulk/.gradle/caches/transforms-3/6901ee0b50503f62743d45af311374a0/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.paulkoepke.unitpricecomparison.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.paulkoepke.unitpricecomparison.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/paulk/.gradle/caches/transforms-3/f66b2f5d0bab0a869d5dca50d0495319/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/paulk/.gradle/caches/transforms-3/31526148331f61284016eabac5b71606/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /Users/paulk/.gradle/caches/transforms-3/cc0abccbe910abeb75dab1f00345618e/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/paulk/.gradle/caches/transforms-3/4a1cd617fc3108e54fa92013f02bfe77/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
